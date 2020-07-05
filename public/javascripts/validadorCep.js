@@ -61,6 +61,7 @@ function preencheCep(){
     {
     alert("O CEP DIGITADO ESTÁ INVÁLIDO");
     inputCep.value = "";
+    inputCep.focus();
     return ;
     }
     atribuirCampos(data);
