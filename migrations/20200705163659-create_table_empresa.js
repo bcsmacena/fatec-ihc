@@ -68,7 +68,7 @@ module.exports = {
           type: Sequelize.STRING(11),
           allowNull: false
         },
-        resposavel:
+        responsavel:
         {
           type: Sequelize.STRING(100),
           allowNull: false

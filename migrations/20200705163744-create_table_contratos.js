@@ -42,11 +42,6 @@ module.exports = {
           type: Sequelize.STRING(100),
           allowNull: true
         },
-        atuacao:
-        {
-          type: Sequelize.STRING(100),
-          allowNull: false
-        },
         inicioJornada:
         {
           type: Sequelize.TIME,
@@ -59,7 +54,7 @@ module.exports = {
         },
         valorHora:
         {
-          type: Sequelize.DECIMAL,
+          type: Sequelize.DECIMAL(10,2),
           allowNull: false
         },
       })
