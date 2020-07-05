@@ -8,6 +8,8 @@ const cadastroColaboradorController = {
     store: async(req,res) => {
         const { cpf, nome, dataNascimento, sexo, cep, endereco, complemento, bairro, cidade, estado, telefone, email, senha } = req.body
 
+        const hashPassword = bcrypt.hashSync(senha, 10);
+
         if(sexo == "feminino"){
             attrSexo = "f";
         } else {
@@ -28,7 +30,7 @@ const cadastroColaboradorController = {
                 estado,
                 telefone,
                 email,
-                senha
+                senha: hashPassword
             })
             res.send(colaborador);
         }
