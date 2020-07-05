@@ -1,0 +1,38 @@
+<%- include('partials/head.ejs') %>
+<body>
+    <header>
+        <nav class="navbar sticky-top navbar-light bg-light">
+            <a class="navbar-brand" href="#">Trabalho Intermitente</a>
+            <a class="navbar-brand" href="/">Sair</a>
+        </nav>
+    </header>
+    <main class='container mt-5 col-lg-6'>
+        <div class='row'>
+            <div class='ml-3'>
+                <h2>Perfil Empresa</h2>
+            </div>
+        </div>
+        <div class='row my-4 d-flex justify-content-center '>
+            <div class='col-lg-9 d-flex justify-content-around'>
+                <div class="text-center">
+                    <a href="/cadastro/contrato"><i class="material-icons" style="font-size:72px;color:black">person_add</i></a>
+                    <p>Adicionar Contrato</p>
+                </div>
+                <div class="text-center">
+                    <a href="/empresa/colaboradores"><i class="material-icons" style="font-size:72px;color:black">group</i></a>
+                    <p>Colaboradores</p>
+                </div>
+               
+            </div>
+        </div>
+
+
+
+          
+        </main>
+    
+        <%- include('partials/jsBootstrap.ejs') %>
+    
+  
+    </body>
+    </html>

@@ -1,0 +1,141 @@
+<%- include('partials/head.ejs') %>
+
+
+
+<body>
+
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Click
+        </a>
+      </p>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container">
+    <div class="row d-flex justify-content-center">
+        <!-- <div class="col-lg-4"> -->
+        <% for (let index = 0; index < 1; index++) { %>
+            <div class="card text-center ml-2 mb-2">
+                <div class="card-header text-left">
+                    Fulano
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-left">Pintor</h5>
+                    <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+                    <a href="#" class="btn btn-success">Solicitar</a>
+                    <a href="#" class="btn btn-info">Informações</a>
+                </div>
+                <!-- <div class="card-footer text-muted">
+                    1 day ago
+                </div> -->
+            </div>
+            
+        <% } %>
+    <!-- </div> -->
+      </div>
+    </div>
+
+    <div class="card text-center">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <%# let funcionarios = ["Fulano da Silva", "Beltrano de Souza", "Sicrano das Dores"] %>
+    <%# for (let index = 0; index < funcionarios.length; index++) { %>
+        <div class="card text-center ml-2 mb-2">
+            <div class="card-header text-left">
+                <%#= funcionarios[index] %>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-left">Pintor</h5>
+                <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+                <a href="#" class="btn btn-success">Convocar</a>
+                <a href="#" class="btn btn-info">Informações</a>
+                <a href="#" class="btn btn-danger">Excluir</a>
+            </div>
+        </div>
+        
+    <%# } %>
+
+
+
+
+
+</body>
+
+
+
+
+
+<%- include('partials/jsBootstrap.ejs') %>
+    
+  
+</body>
+</html>

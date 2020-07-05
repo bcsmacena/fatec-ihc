@@ -1,0 +1,98 @@
+<%- include('../partials/head.ejs') %>
+<body>
+    <header>
+        <nav class="navbar sticky-top navbar-light bg-light">
+            <a class="navbar-brand" href="#">Trabalho Intermitente</a>
+            <a class="navbar-brand" href="/cadastro"><i class="fa fa-undo"></i></a>
+            
+        </nav>
+    </header>
+    <main class='container mt-2 col-lg-6'>
+        <div class='row'>
+            <div class='ml-3'>
+                <h2>Cadastro Empresa</h2>
+            </div>
+        </div>
+        <!-- <div class='row'>
+            <div class='ml-4 mt-2'>
+                <p>cadastro de empresa:</p>
+            </div>
+        </div> -->
+
+
+         <!-- 
+            EMPRESAS: Razão social, Nome fantasia, CNPJ, endereço, 
+                      telefone, e-mail, área de atuação, número de contratos, 
+                      histórico de convocação, local do serviço, responsável; 
+         -->
+        <form class='col-sm-12' action="/cadastro/empresa" method="POST">
+            <div class="form-group">
+                <div class='col-sm-12 p-1 bg-danger text-light text-center d-none' id='mensagem' >***Preencha todos os campos***</div>
+            </div> 
+            <div class="form-group">
+                <label for="cnpj">CNPJ:</label>
+                <input type="text" class="form-control" name="cnpj" id="cnpj" aria-describedby="cnpj" placeholder="00.000.000/0000-00">
+            </div>
+            <div class="form-group">
+              <label for="razaoSocial">Razão Social:</label>
+              <input type="text" class="form-control" name="razaoSocial" id="razaoSocial" aria-describedby="razaoSocial" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="nomeFantasia">Nome Fantasia:</label>
+                <input type="text" class="form-control" name="nomeFantasia" id="nomeFantasia" aria-describedby="nomeFantasia" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="atuacao">Área de Atuação:</label>
+                <input type="text" class="form-control" name="atuacao" id="atuacao" aria-describedby="atuacao" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="cep">CEP:</label>
+                <input type="text" class="form-control" name="cep" id="cep" aria-describedby="cep" placeholder="00000-000">
+            </div>
+            <div class="form-group">
+                <label for="nome">Endereço:</label>
+                <input type="text" class="form-control" name="endereco" id="endereco" aria-describedby="endereco" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="bairro">Bairro:</label>
+                <input type="text" class="form-control" name="bairro" id="bairro" aria-describedby="bairro" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="nome">Cidade:</label>
+                <input type="text" class="form-control" name="cidade" id="cidade" aria-describedby="cidade" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="nome">Estado:</label>
+                <input type="text" class="form-control" name="estado" id="estado" aria-describedby="estado" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="text" class="form-control" name="telefone" id="telefone" aria-describedby="telefone" placeholder="(00) 00000-0000">
+            </div>
+            <div class="form-group">
+                <label for="responsavel">Responsável:</label>
+                <input type="text" class="form-control" name="responsavel" id="responsavel" aria-describedby="responsavel" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="email@email.com.br">
+              </div>
+            <div class="form-group">
+              <label for="senha">Senha</label>
+              <input type="password" class="form-control" name="senha" id="senha" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="senha">Confirmação de Senha</label>
+                <input type="password" class="form-control" name="confirmaSenha" id="confirmaSenha" placeholder="">
+              </div>
+            <div class="form-group ">
+                <button type="submit" id="btn-entrar" class="btn btn-success col-12">Cadastrar</button>
+            </div>
+          </form>
+        </main>
+    
+        <%- include('../partials/jsBootstrap.ejs') %>
+    
+
+    </body>
+    </html>

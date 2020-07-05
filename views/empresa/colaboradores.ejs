@@ -1,0 +1,123 @@
+<%- include('../partials/head.ejs') %>
+<body>
+    <header>
+        <nav class="navbar sticky-top navbar-light bg-light">
+            <a class="navbar-brand" href="#">Trabalho Intermitente</a>
+            <a class="navbar-brand" href="/empresa"><i class="fa fa-undo"></i></a>
+        </nav>
+    </header>
+    <main class='container mt-4 col-lg-6'>
+        <div class='row'>
+            <div class='ml-3'>
+                <h2>Empresa</h2>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='ml-3 mt-4'>
+                <p>Lista de colaboradores:</p>
+            </div>
+        </div>
+
+        <form class='col-sm-12 p-0' action="/cadastro/colaborador" method="POST">
+            <div class="form-group">
+                <input type="search" class="form-control" name="search" id="search" placeholder="Pesquisar">
+            </div>
+        </form>
+
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <a href="#" class="btn btn-secondary col-12 col-lg-5 mb-2 mr-0"  onclick="eventCheckBox()">Selecionar todos </a>
+                <a href="#" class="btn btn-success col-12 col-lg-5 mb-2">Convocar todos os selecionados</a>
+            </div>
+        </div>
+        <% let funcionarios = [
+            {id:1, nome:"Fulano da Silva", funcao:"Encanador"},
+            {id:2,nome:"Beltrano de Souza", funcao:"Eletricista"},
+            {id:3,nome:"Sicrano das Dores", funcao:"Pintor"}] 
+        %>
+
+<div class="form-check pl-0">
+    
+
+        <% for (let index = 0; index < funcionarios.length; index++) { %>
+        <div class="card text-center mb-2">
+            <div class="card-header text-left bg-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-12 col-lg-6 d-flex align-items-center mb-2 pl-0">
+                            <input class="form-check-input position-static m-1 checkbox" type="checkbox" id="blankCheckbox-<%= funcionarios[index].id %>" value="option<%= funcionarios[index].id %>" aria-label="...">
+                            <%= funcionarios[index].nome %> - <%= funcionarios[index].funcao %>
+                        </div>
+                            
+
+                            <div class="col d-flex justify-content-end  col-12 col-lg-6 pr-0 ">
+                                <a class="btn btn-info ml-1" data-toggle="collapse" href="#collapse-<%= funcionarios[index].id %>" role="button" aria-expanded="false" aria-controls="collapseExample">Informações</a>
+                                <a href="#" class="btn btn-success ml-1">Convocar</a>
+                                <!-- <a href="#" class="btn btn-danger ml-1">Excluir</a> -->
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="collapse-<%= funcionarios[index].id %>">
+                <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home-<%= funcionarios[index].id %>" role="tab" aria-controls="nav-home" aria-selected="true">Dados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile-<%= funcionarios[index].id %>" role="tab" aria-controls="nav-profile" aria-selected="false">Contrato</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact-<%= funcionarios[index] %>" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+                    </li> -->
+                </ul>
+                </div>
+          
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="nav-home-<%= funcionarios[index].id %>" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="card-body">
+                            <h5 class="card-title text-left"><%= funcionarios[index].nome %></h5>
+                            <p class="card-text text-left">Email:</p>
+                            <p class="card-text text-left">Telefone:</p>
+                            <p class="card-text text-left">With supporting text below as a natural lead-in to additional content.</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile-<%= funcionarios[index].id %>" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="card-body">
+                            <h5 class="card-title text-left">Função: <%= funcionarios[index].funcao %></h5>
+                            <p class="card-text text-left">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero quos voluptates veniam ipsam molestias cupiditate necessitatibus quidem temporibus, aut corrupti esse tempora dicta consectetur. Obcaecati saepe perferendis tempore animi ullam? </p>
+                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                        </div>
+                    </div>
+                    <!-- <div class="tab-pane fade" id="nav-contact-<%= funcionarios[index] %>" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+    </div>
+
+
+        
+    </main>
+
+    <%- include('../partials/jsBootstrap.ejs') %>
+
+    <script>
+        function eventCheckBox() {
+            let checkboxs = document.getElementsByClassName('checkbox');
+            for(let i = 0; i < checkboxs.length ; i++) {
+                checkboxs[i].checked = !checkboxs[i].checked;
+            }
+        }
+    </script>
+
+
+</body>
+</html>

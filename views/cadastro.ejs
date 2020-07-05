@@ -1,0 +1,40 @@
+<%- include('partials/head.ejs') %>
+<body>
+    <header>
+        <nav class="navbar sticky-top navbar-light bg-light">
+            <a class="navbar-brand" href="#">Trabalho Intermitente</a>
+            <a class="navbar-brand" href="/"><i class="fa fa-undo"></i></a>
+            
+        </nav>
+    </header>
+    <main class='container mt-5 col-lg-6'>
+    <div class='row'>
+        <div class='ml-3'>
+            <h2>Cadastro</h2>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='ml-5 mt-4'>
+            <p>cadastrar como:</p>
+        </div>
+    </div>
+    <div class='row my-4 d-flex justify-content-center '>
+        <div class='col-lg-9 d-flex justify-content-around'>
+            <div class="text-center">
+                <a href="/cadastro/colaborador"><i class="material-icons" style="font-size:72px;color:black">person</i></a>
+                <p>colaborador</p>
+            </div>
+            <div class="text-center">
+                <a href="/cadastro/empresa"><i class="material-icons" style="font-size:72px;color:black">business</i></a>
+                <p>empresa</p>
+            </div>
+           
+        </div>
+    </div>
+    </main>
+
+    <%- include('partials/jsBootstrap.ejs') %>
+
+<script src='/javascripts/login.js'></script>
+</body>
+</html>
