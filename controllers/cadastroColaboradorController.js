@@ -8,12 +8,18 @@ const cadastroColaboradorController = {
     store: async(req,res) => {
         const { cpf, nome, dataNascimento, sexo, cep, endereco, complemento, bairro, cidade, estado, telefone, email, senha } = req.body
 
+        if(sexo == "feminino"){
+            attrSexo = "f";
+        } else {
+            attrSexo = "m";
+        }
+
         try{
             const colaborador = await Colaborador.create({
                 cpf,
                 nome,
                 dataNascimento,
-                sexo,
+                sexo: attrSexo,
                 cep,
                 endereco,
                 complemento,
