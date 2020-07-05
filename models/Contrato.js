@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
         valorHora:
         {
             type: DataTypes.DECIMAL,
-            allowNull: no,
+            allowNull: false,
         },
       },
       {
