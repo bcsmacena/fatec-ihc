@@ -1,10 +1,11 @@
 <%- include('../partials/head.ejs') %>
+<script src="/javascripts/jquery-3.2.0.min.js"></script>
+<script src="/javascripts/jquery.mask.min.js"></script>
 <body>
     <header>
         <nav class="navbar sticky-top navbar-light bg-light">
             <a class="navbar-brand" href="#">Trabalho Intermitente</a>
-            <a class="navbar-brand" href="/empresa"><i class="fa fa-undo"></i></a>
-            
+            <a class="navbar-brand" href="/empresa"><i class="fa fa-undo"></i></a>  
         </nav>
     </header>
     <main class='container mt-5 col-lg-6'>
@@ -13,11 +14,6 @@
                 <h2>Cadastro Contrato</h2>
             </div>
         </div>
-        <!-- <div class='row'>
-            <div class='ml-5 mt-4'>
-                <p>cadastro de colaborador:</p>
-            </div>
-        </div> -->
 
         <!-- 
             COLABORADORES: Nome, MEI, CPF, área de atuação, telefone, e-mail, número de contratos, 
@@ -57,24 +53,38 @@
                 </select>
               </div>
             <div class="form-group">
-                <label for="jornada">Intervalo Jornada</label>
                 <div class="row">
                     <div class="col">
-                        <input type="time" class="form-control" name="jornada" id="jornada" aria-describedby="jornada" placeholder="">
+                        <label for="jornada">Início Jornada</label>
+                        <input type="time" class="form-control" name="inicioJornada" id="inicioJornada" aria-describedby="inicioJornada" placeholder="08:00">
                     </div>
                     <div class="col">
-                        <input type="time" class="form-control" name="jornada" id="jornada" aria-describedby="jornada" placeholder="">
+                        <label for="jornada">Término Jornada</label>
+                        <input type="time" class="form-control" name="terminoJornada" id="terminoJornada" aria-describedby="terminoJornada" placeholder="17:00">
+                    </div>
+                    <div class="col">
+                        <label for="jornada">Valor/Hora</label>
+                        <input type="text" id="valorHora"  autocomplete="off" name="valorHora" class="valorHora text-right form-control" inputmode="numeric" value="">
+                        <script>
+                            $('#valorHora').mask('#.##0,00', {reverse: true});
+                        </script>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Informações Complementares:</label>
+                <textarea class="form-control" name="descricao" id="descricao" cols="58" rows="5"></textarea>
             </div>
             <div class="form-group ">
                 <button type="submit" id="btn-entrar" class="btn btn-success col-12">Cadastrar</button>
             </div>
           </form>
         </main>
+
     
         <%- include('../partials/jsBootstrap.ejs') %>
-    
+        
+
   
     </body>
     </html>
