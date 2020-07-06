@@ -24,10 +24,13 @@
                     <div class='col-sm-12 p-1 bg-danger text-light text-center' id='mensagem' ><%= msg %></div>
                 <% } %>
                 <input type="text" name="idLogado" id="idLogado" value="<%= idLogado %>" readonly hidden>
+                <% colaboradores.forEach(colaborador => { %>
+                    <div id="<%=colaborador.cpf %>" nome="<%= colaborador.nome %>" telefone="<%= colaborador.telefone %>" email="<%= colaborador.email %>"></div>
+                <% }); %>
             </div> 
             <div class="form-group">
                 <label for="cpf">CPF:</label>
-                <input type="text" class="form-control" name="cpf" id="cpf" aria-describedby="cpf" placeholder="000.000.000-00" required>
+                <input type="text" class="form-control" onfocusout="preencheCampos()" name="cpf" id="cpf" aria-describedby="cpf" placeholder="000.000.000-00" required>
             </div>
             <div class="form-group">
               <label for="nome">Nome:</label>
@@ -44,8 +47,8 @@
             </div>
             <div class="form-group">
                 <label for="funcao">Função</label>
-                <select class="form-control" id="funcao" name="funcao" required>
-                  <option>Selecione...</option>
+                <select class="form-control" id="funcao" name="funcao"  required>
+                  <option value="" disabled selected hidden>Selecione uma opção...</option>
                   <option>Pintor</option>
                   <option>Carpinteiro</option>
                   <option>Eletricista</option>
@@ -86,7 +89,29 @@
     
         <%- include('../partials/jsBootstrap.ejs') %>
         
-
+        <script>
+            function preencheCampos() {
+                const cpf = document.getElementById("cpf")
+                const mensagem = document.getElementById("mensagem");
+                if(typeof mensagem != 'undefined' && mensagem != null) {
+                    mensagem.classList.add("d-none");
+                }
+                if(cpf.value){
+                    const colaborador = document.getElementById(cpf.value);
+                    
+                    if(colaborador){
+                        let nome = document.getElementById("nome");
+                        let telefone = document.getElementById("telefone");
+                        let email = document.getElementById("email");
+                        nome.value = colaborador.attributes.nome.value;
+                        telefone.value = colaborador.attributes.telefone.value;
+                        email.value = colaborador.attributes.email.value;                    
+                    } else {
+                        alert("CPF é inválido ou ainda não foi cadastrado");
+                    }
+                }
+            }
+        </script>
   
     </body>
     </html>
