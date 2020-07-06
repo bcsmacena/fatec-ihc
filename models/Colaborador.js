@@ -86,6 +86,9 @@ module.exports = (sequelize, DataTypes) => {
         Colaborador.hasMany(models.Contrato, {
         foreignKey: "colaborador_id",
         });
+        // Colaborador.belongsTo(models.Contrato, {
+        //     foreignKey: "id",
+        // });
     };
   
     return Colaborador;

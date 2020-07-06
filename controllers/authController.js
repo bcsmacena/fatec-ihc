@@ -47,8 +47,8 @@ const authController = {
         name: empresa.nome,
         email: empresa.email,
       };
-
-      return res.redirect("/empresa");
+      
+      return res.render("empresa");
     }
   },
 

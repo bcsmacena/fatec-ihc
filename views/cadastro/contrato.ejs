@@ -14,35 +14,37 @@
                 <h2>Cadastro Contrato</h2>
             </div>
         </div>
-
         <!-- 
             COLABORADORES: Nome, MEI, CPF, área de atuação, telefone, e-mail, número de contratos, 
             histórico de convocação, local do serviço; 
         --> 
-
-        <form class='col-sm-12' action="/cadastro/colaborador" method="POST">
+        <form class='col-sm-12' action="/cadastro/contrato" method="POST">
             <div class="form-group">
-                <div class='col-sm-12 p-1 bg-danger text-light text-center d-none' id='mensagem' >***Preencha todos os campos***</div>
+                <% if( typeof msg !== 'undefined'){ %>
+                    <div class='col-sm-12 p-1 bg-danger text-light text-center' id='mensagem' ><%= msg %></div>
+                <% } %>
+                <input type="text" name="idLogado" id="idLogado" value="<%= idLogado %>" readonly hidden>
             </div> 
             <div class="form-group">
                 <label for="cpf">CPF:</label>
-                <input type="text" class="form-control" name="cpf" id="cpf" aria-describedby="cpf" placeholder="000.000.000-00">
+                <input type="text" class="form-control" name="cpf" id="cpf" aria-describedby="cpf" placeholder="000.000.000-00" required>
             </div>
             <div class="form-group">
               <label for="nome">Nome:</label>
-              <input type="nome" class="form-control" name="nome" id="nome" aria-describedby="nome" placeholder="" readonly>
+              <input type="nome" class="form-control" name="nome" id="nome" aria-describedby="nome" placeholder="" readonly required>
             </div>
+            <%# a = document.querySelector("#id"); console.log(a) %>
             <div class="form-group">
                 <label for="telefone">Telefone</label>
-                <input type="text" class="form-control" name="telefone" id="telefone" aria-describedby="telefone" placeholder="(00) 00000-0000" readonly>
+                <input type="text" class="form-control" name="telefone" id="telefone" aria-describedby="telefone" placeholder="(00) 00000-0000" readonly required>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="" readonly>
+                <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="" readonly required>
             </div>
             <div class="form-group">
                 <label for="funcao">Função</label>
-                <select class="form-control" id="funcao" name="funcao">
+                <select class="form-control" id="funcao" name="funcao" required>
                   <option>Selecione...</option>
                   <option>Pintor</option>
                   <option>Carpinteiro</option>
@@ -56,15 +58,15 @@
                 <div class="row">
                     <div class="col">
                         <label for="jornada">Início Jornada</label>
-                        <input type="time" class="form-control" name="inicioJornada" id="inicioJornada" aria-describedby="inicioJornada" placeholder="08:00">
+                        <input type="time" class="form-control" name="inicioJornada" id="inicioJornada" aria-describedby="inicioJornada" value="08:00" required>
                     </div>
                     <div class="col">
                         <label for="jornada">Término Jornada</label>
-                        <input type="time" class="form-control" name="terminoJornada" id="terminoJornada" aria-describedby="terminoJornada" placeholder="17:00">
+                        <input type="time" class="form-control" name="terminoJornada" id="terminoJornada" aria-describedby="terminoJornada" value="17:00" required>
                     </div>
                     <div class="col">
                         <label for="jornada">Valor/Hora</label>
-                        <input type="text" id="valorHora"  autocomplete="off" name="valorHora" class="valorHora text-right form-control" inputmode="numeric" value="">
+                        <input type="text" id="valorHora"  autocomplete="off" name="valorHora" class="valorHora text-right form-control" inputmode="numeric" value="" required>
                         <script>
                             $('#valorHora').mask('#.##0,00', {reverse: true});
                         </script>

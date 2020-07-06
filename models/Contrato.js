@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        colaborador_Id: 
+        colaborador_id: 
         {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -54,10 +54,10 @@ module.exports = (sequelize, DataTypes) => {
   
     Contrato.associate = (models) => {
         Contrato.belongsTo(models.Colaborador, {
-            foreignKey: "id",
+            foreignKey: "colaborador_id",
         });
         Contrato.belongsTo(models.Empresa, {
-            foreignKey: "id",
+            foreignKey: "empresa_id",
         });
     };
   
