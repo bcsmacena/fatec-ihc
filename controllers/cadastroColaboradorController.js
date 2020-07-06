@@ -32,9 +32,12 @@ const cadastroColaboradorController = {
                 email,
                 senha: hashPassword
             })
-            res.send(colaborador);
+            return res.render('auth/login', {msg: "Colaborador cadastrado com sucesso!"});
         }
         catch(e){
+            if(e.name == "SequelizeUniqueConstraintError"){
+                return res.render('cadastro/colaborador', {msg: "Já possui cadastro"}) 
+            }
             res.send(e);
         }
     },

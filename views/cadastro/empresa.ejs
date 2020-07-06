@@ -28,6 +28,9 @@
         <form class='col-sm-12' action="/cadastro/empresa" method="POST">
             <div class="form-group">
                 <div class='col-sm-12 p-1 bg-danger text-light text-center d-none' id='mensagem' >***Preencha todos os campos***</div>
+                <% if( typeof msg !== 'undefined'){ %>
+                    <div class='col-sm-12 p-1 bg-danger text-light text-center' id='mensagem' ><%= msg %></div>
+                <% } %>
             </div> 
             <div class="form-group">
                 <label for="cnpj">CNPJ:</label>
