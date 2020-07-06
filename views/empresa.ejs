@@ -10,6 +10,9 @@
         <div class='row'>
             <div class='ml-3'>
                 <h2>Perfil Empresa</h2>
+                <% if( typeof msg !== 'undefined'){ %>
+                    <div class='col-sm-12 p-1 bg-success text-light text-center' id='mensagem' ><%= msg %></div>
+                <% } %>
             </div>
         </div>
         <div class='row my-4 d-flex justify-content-center '>

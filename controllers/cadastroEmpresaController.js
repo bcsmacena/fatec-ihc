@@ -27,10 +27,10 @@ const cadastroEmpresaController = {
                 email,
                 senha: hashPassword
             })
-            res.send(empresa);
+            return res.render('auth/login', { msg: "Empresa cadastrada com sucesso!"});
         }
         catch(e){
-            res.send(e);
+            return res.send(e);
         }
     },
 }
