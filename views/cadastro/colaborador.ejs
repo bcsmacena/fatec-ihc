@@ -30,21 +30,24 @@
                 <% if( typeof msg !== 'undefined'){ %>
                     <div class='col-sm-12 p-1 bg-danger text-light text-center' id='msg' ><%= msg %></div>
                 <% } %>
+            </div>
+            <div class="form-group">
+                <div class='col-sm-12 text-danger text-left pl-0' >Campos com * são de preenchimento obrigatório</div>
             </div> 
             <div class="form-group">
-                <label for="cpf">CPF:</label>
+                <label for="cpf">* CPF:</label>
                 <input type="text" class="form-control" name="cpf" id="cpf" aria-describedby="cpf" placeholder="Insira somente os números sem os pontos" required>
             </div>
             <div class="form-group">
-              <label for="nome">Nome:</label>
+              <label for="nome">* Nome:</label>
               <input type="nome" class="form-control" name="nome" id="nome" aria-describedby="nome" placeholder="" required>
             </div>
             <div class="form-group">
-                <label for="data">Data Nascimento:</label>
+                <label for="data">* Data Nascimento:</label>
                 <input type="date" class="form-control" name="dataNascimento" id="dataNascimento" aria-describedby="dataNascimento" placeholder="" required>
             </div>
             <div class="form-group">
-                <label for="data">Sexo:</label>
+                <label for="data">* Sexo:</label>
                 <select class="form-control" id="sexo"  name="sexo" id="sexo" aria-describedby="sexo" placeholder="Selecione uma opção" required>
                     <option></option>
                     <option>masculino</option>
@@ -52,7 +55,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="cep">CEP:</label>
+                <label for="cep">* CEP:</label>
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-6">
                         <input type="text" class="mb-2 form-control" name="cep" id="cep" aria-describedby="cep" placeholder="00000000" required>
@@ -63,39 +66,39 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="nome">Endereço:</label>
+                <label for="nome">* Endereço:</label>
                 <input type="text" class="form-control" name="endereco" id="endereco" aria-describedby="endereco" placeholder="" required readonly>
             </div>
             <div class="form-group">
-                <label for="nome">Número e Complemento:</label>
+                <label for="nome">* Número e Complemento:</label>
                 <input type="text" class="form-control" name="complemento" id="endereco" aria-describedby="endereco" placeholder="" required>
             </div>
             <div class="form-group">
-                <label for="bairro">Bairro:</label>
+                <label for="bairro">* Bairro:</label>
                 <input type="text" class="form-control" name="bairro" id="bairro" aria-describedby="bairro" placeholder="" readonly>
             </div>
             <div class="form-group">
-                <label for="nome">Cidade:</label>
+                <label for="nome">* Cidade:</label>
                 <input type="text" class=" form-control" name="cidade" id="cidade" aria-describedby="cidade" placeholder="" readonly>
             </div>
             <div class="form-group">
-                <label for="nome">Estado:</label>
+                <label for="nome">* Estado:</label>
                 <input type="text" class="form-control" name="estado" id="estado" aria-describedby="estado" placeholder="" readonly>
             </div>
             <div class="form-group">
-                <label for="telefone">Telefone</label>
+                <label for="telefone">* Telefone</label>
                 <input type="text" class="form-control" name="telefone" id="telefone" aria-describedby="telefone" placeholder="(00) 00000-0000" required>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">* Email</label>
                 <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="" required>
               </div>
             <div class="form-group">
-              <label for="senha">Senha</label>
+              <label for="senha">* Senha</label>
               <input type="password" class="form-control" name="senha" id="senha" placeholder="" required>
             </div>
             <div class="form-group">
-                <label for="senha">Confirmação de Senha</label>
+                <label for="senha">* Confirmação de Senha</label>
                 <input type="password" class="form-control" name="confirmaSenha" id="senha" placeholder="" required>
               </div>
             <div class="form-group ">
