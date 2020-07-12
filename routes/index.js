@@ -7,6 +7,9 @@ const cadastroColaboradorController = require('../controllers/cadastroColaborado
 const cadastroEmpresaController = require('../controllers/cadastroEmpresaController');
 const cadastroContratoController = require('../controllers/cadastroContratoController');
 const contratoController = require('../controllers/contratoController');
+const cadastroEventoController = require('../controllers/cadastroEventoController');
+const eventoController = require('../controllers/eventoController');
+const convocacaoController = require('../controllers/convocacaoController');
 const authController = require('../controllers/authController');
 const auth = require("../middlewares/auth");
 const { route } = require('./users');
@@ -34,16 +37,23 @@ router.post('/cadastro/empresa', cadastroEmpresaController.store);
 router.get('/cadastro/contrato', auth, cadastroContratoController.index);
 router.post('/cadastro/contrato', auth, cadastroContratoController.store);
 
+router.get('/cadastro/evento', auth, cadastroEventoController.index);
+router.post('/cadastro/evento', auth, cadastroEventoController.store);
 
+router.get('/convoca/evento/:id', auth, convocacaoController.index);
+
+router.get('/cadastro/evento', (req, res) => res.render('cadastro/evento'));
 
 router.get('/colaborador', auth, (req,res) => res.render('colaborador'));
-
 
 router.get('/empresa', auth, (req,res) => res.render('empresa'));
 
 router.get('/empresa/colaboradores', auth, contratoController.index);
 
 router.get('/contratos', auth, (req,res) => res.render('contratos'));
+
+
+router.get('/empresa/eventos', auth, eventoController.index);
 
 router.get('/teste', (req,res) => res.render('teste'));
 

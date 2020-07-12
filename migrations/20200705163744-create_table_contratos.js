@@ -42,16 +42,6 @@ module.exports = {
           type: Sequelize.STRING(100),
           allowNull: true
         },
-        inicioJornada:
-        {
-          type: Sequelize.TIME,
-          allowNull: false
-        },
-        terminoJornada:
-        {
-          type: Sequelize.TIME,
-          allowNull: false
-        },
         valorHora:
         {
           type: Sequelize.DECIMAL(10,2),

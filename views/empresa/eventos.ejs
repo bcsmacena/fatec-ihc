@@ -1,0 +1,63 @@
+<%- include('../partials/head.ejs') %>
+<body>
+    <header>
+        <nav class="navbar sticky-top navbar-light bg-light">
+            <a class="navbar-brand" href="#">Trabalho Intermitente</a>
+            <a class="navbar-brand" href="/empresa"><i class="fa fa-undo"></i></a>
+        </nav>
+    </header>
+    <main class='container mt-4 col-lg-6'>
+        <div class='row'>
+            <div class='ml-3'>
+                <h2>Eventos</h2>
+            </div>
+        </div>
+        <!-- <div class='row'>
+            <div class='ml-3 mt-4'>
+                <p>Lista de eventos:</p>
+            </div>
+        </div> -->
+
+        <% if(typeof eventos !== 'undefined' && eventos.length !== 0) { %>
+        <!-- <div class='row'>
+            <div class='ml-3 mt-4'>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Manutenção na Fatec</h5>
+                        <p class="card-text">Data: 12/07/2020 - Início: 08:00 - Término: 19:00 </p>
+                        <h6 class="card-subtitle mb-2 text-muted">Descrição:</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">Aceites [0/10] </p>
+                        <a href="#" class="card-link">Convocar</a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <% eventos.forEach(evento => { %>
+            <div class='row'>
+                <div class='ml-3 pl-0 mt-4 col-12'>
+                    <div class="card">
+                        <div class="card-body">
+                        <h5 class="card-title"><%= evento.nome %></h5>
+                        <p class="card-text">Data: <%= evento.data %> - Início: <%= evento.inicioJornada %> - Término: <%= evento.terminoJornada %> </p>
+                        <h6 class="card-subtitle mb-2 text-muted">Descrição:</h6>
+                        <p class="card-text"><%= evento.descricao %></p>
+                        <p class="card-text">Aceites [0/10] </p>
+                        <a href="/convoca/evento/<%= evento.id %>" class="card-link">Convocar</a>
+                        <!-- <a href="#" class="card-link">Another link</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+
+        <% } else { %>
+            <div class="text-center"> Não encontramos nenhum evento :( </div>
+        <% } %>
+
+    </main>
+
+    <%- include('../partials/jsBootstrap.ejs') %>
+
+</body>
+</html>

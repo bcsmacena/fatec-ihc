@@ -28,16 +28,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
-        inicioJornada: 
-        {
-            type: DataTypes.TIME,
-            allowNull: false,
-        },
-        terminoJornada:
-        {
-            type: DataTypes.TIME,
-            allowNull: false,
-        },
         valorHora:
         {
             type: DataTypes.DECIMAL,
