@@ -59,6 +59,44 @@ const convocacaoController = {
             return res.send(e);
         }
     },
+    aceita: async(req,res) => {
+        const { id } = req.params
+
+        const date = new Date();
+        
+        try {
+            const convocacao = Convocacao.update({ 
+                dataAceitacao: date 
+            },{
+                where: { id: id },
+                
+            })
+            return res.redirect('/colaborador')
+        }
+        catch(e){
+            console.log(e);
+            return res.send(e);
+        }
+    },
+    recusa: async(req,res) => {
+        const { id } = req.params
+
+        const date = new Date();
+        
+        try {
+            const convocacao = Convocacao.update({ 
+                dataRecusa: date 
+            },{
+                where: { id: id },
+                
+            })
+            return res.redirect('/colaborador')
+        }
+        catch(e){
+            console.log(e);
+            return res.send(e);
+        }
+    }
 }
 
 module.exports = convocacaoController;

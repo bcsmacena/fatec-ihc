@@ -42,6 +42,11 @@ module.exports = {
           type: Sequelize.DATE,
           allowNull: true
         },
+        dataRecusa:
+        {
+          type: Sequelize.DATE,
+          allowNull: true
+        },
       })
     },
 

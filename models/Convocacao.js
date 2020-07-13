@@ -28,6 +28,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATE,
             allowNull: true,
         },
+        dataRecusa: 
+        {
+            type: DataTypes.DATE,
+            allowNull: true,
+        },
     },
     {
         timestamps: false,

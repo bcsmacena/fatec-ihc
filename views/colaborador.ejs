@@ -9,7 +9,7 @@
     <main class='container mt-5 col-lg-6'>
         <div class='row'>
             <div class='ml-3'>
-                <h2>Perfil Colaborador</h2>
+                <h2><%= colaborador.nome %></h2>
             </div>
         </div>
         <div class='row'>
@@ -17,13 +17,77 @@
                 <p>Lista de notificações:</p>
             </div>
         </div>
-        <div class="card text-center ml-2 mb-2">
+        <div>
+            <% colaborador.Contratos.forEach(contrato => { %>    
+            <% contrato.Convocacaos.forEach(convocacao => { %>
+                    <% mensagem = "" %>
+                    <% if(!convocacao.dataAceitacao && !convocacao.dataRecusa){ %>
+                        <div class="card text-center ml-2 mb-2">
+                            <h5 class="card-header">
+                                <%= moment(convocacao.Evento.data).format("DD/MM/YYYY") %>
+                                -
+                                <%= (convocacao.Evento.inicioJornada).slice(0,5) %> às <%= (convocacao.Evento.terminoJornada).slice(0,5) %>
+                            </h5>
+                            <div class="card-body">
+                                <p class="card-title text-left">Empresa: <%= convocacao.Evento.Empresa.razaoSocial %> </p>
+                                <p class="card-title text-left">Função: <%= contrato.funcao %></p>
+                                <p class="card-text text-left">Endereço: <%= convocacao.Evento.endereco %>, 
+                                                                        <%= convocacao.Evento.complemento %> -
+                                                                        <%= convocacao.Evento.bairro %> -
+                                                                        <%= convocacao.Evento.cidade %> - 
+                                                                        <%= convocacao.Evento.estado %>
+                                </p>
+                                <a href="/aceita/<%= convocacao.id %>" class="btn btn-success">Aceitar</a>
+                                <a href="/recusa/<%= convocacao.id %>" class="btn btn-danger">Recusar</a>
+                                <!-- <a href="#" class="btn btn-info">Informações</a> -->
+                            </div>
+                            <div class="card-footer text-muted">
+                                Data da convocação: <%= moment(convocacao.dataConvocacao).format("DD/MM/YYYY HH:mm:ss") %>
+                            </div>
+                        </div>
+                    <% } else { mensagem = "Não existem solicitações pendentes!"} %>
+            <% }); %>
+            <% }); %>
+        </div>
+        <div class='text-center'>
+            <%= mensagem %>
+        </div>
+
+        <div class='row'>
+            <div class='ml-5 mt-4'>
+                <p>Lista de aceitos:</p>
+            </div>
+        </div>
+        <div>
+            <% colaborador.Contratos.forEach(contrato => { %>
+            <% contrato.Convocacaos.forEach(convocacao => { %>
+                <% if(convocacao.dataAceitacao){ %>
+                    <div class='ml-3'>                                 
+                        <%= moment(convocacao.Evento.data).format("DD/MM/YYYY") %>
+                        -
+                        <%= (convocacao.Evento.inicioJornada).slice(0,5) %> às <%= (convocacao.Evento.terminoJornada).slice(0,5) %>
+                        -
+                        <%= convocacao.Evento.endereco %>, 
+                        <%= convocacao.Evento.complemento %> -
+                        <%= convocacao.Evento.bairro %>
+                    </div>
+                <% } %>
+            <% }); %>
+            <% }); %>
+        </div>
+
+
+
+
+
+
+
+        <!-- <div class="card text-center ml-2 mb-2">
             <div class="card-header text-left">
                 Empresa A
             </div>
             <div class="card-body">
                 <h5 class="card-title text-left">Pintor</h5>
-                <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
                 <a href="#" class="btn btn-success">Aceitar</a>
                 <a href="#" class="btn btn-danger">Recusar</a>
                 <a href="#" class="btn btn-info">Informações</a>
@@ -38,7 +102,6 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title text-left">Carpinteiro</h5>
-                <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
                 <a href="#" class="btn btn-success">Aceitar</a>
                 <a href="#" class="btn btn-danger">Recusar</a>
                 <a href="#" class="btn btn-info">Informações</a>
@@ -53,7 +116,6 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title text-left">Marceneiro</h5>
-                <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
                 <a href="#" class="btn btn-success">Aceitar</a>
                 <a href="#" class="btn btn-danger">Recusar</a>
                 <a href="#" class="btn btn-info">Informações</a>
@@ -68,7 +130,6 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title text-left">Encanador</h5>
-                <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
                 <a href="#" class="btn btn-success">Aceitar</a>
                 <a href="#" class="btn btn-danger">Recusar</a>
                 <a href="#" class="btn btn-info">Informações</a>
@@ -76,7 +137,7 @@
             <div class="card-footer text-muted">
                 4 days ago
             </div>
-        </div>
+        </div> -->
  
           
         </main>
