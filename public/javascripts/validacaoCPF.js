@@ -1,4 +1,3 @@
-alert("Teste");
 const inputCpf = document.querySelector("#cpf");
 
 inputCpf.addEventListener("keypress", (e) => {

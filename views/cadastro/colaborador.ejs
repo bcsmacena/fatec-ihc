@@ -50,8 +50,8 @@
                 <label for="data">* Sexo:</label>
                 <select class="form-control" id="sexo"  name="sexo" id="sexo" aria-describedby="sexo" placeholder="Selecione uma opção" required>
                     <option></option>
-                    <option>masculino</option>
-                    <option>feminino</option>
+                    <option>Masculino</option>
+                    <option>Feminino</option>
                 </select>
             </div>
             <div class="form-group">
@@ -99,7 +99,7 @@
             </div>
             <div class="form-group">
                 <label for="senha">* Confirmação de Senha</label>
-                <input type="password" class="form-control" name="confirmaSenha" id="senha" placeholder="" required>
+                <input type="password" class="form-control" name="confirmaSenha" id="confirmaSenha" placeholder="" required>
               </div>
             <div class="form-group ">
                 <button type="submit" id="btn-entrar" class="btn btn-success col-12">Cadastrar</button>
@@ -110,6 +110,8 @@
         <%- include('../partials/jsBootstrap.ejs') %>
         <script src="/javascripts/validacaoCPF.js"></script>
         <script src="/javascripts/validadorCep.js"></script>
+        <script src="/javascripts/validacaoTele.js"></script>
+        <script src="/javascripts/validacaoSenha.js"></script>
         <script>
             function limpaMsg(){
                 setTimeout(function () {
