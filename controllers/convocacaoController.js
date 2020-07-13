@@ -145,7 +145,7 @@ const convocacaoController = {
                     const convocacao = await Convocacao.update({ 
                         dataRecusa: date 
                     },{
-                        where: Sequelize.and({dataAceitacao: null },{dataRecusa: null }),
+                        where: Sequelize.and({dataAceitacao: null },{dataRecusa: null }, {evento_id: eventoId}),
                         
                     })
                     return res.redirect('/colaborador')
