@@ -43,15 +43,16 @@
                     <div class="card">
                         <div class="card-body">
                             <% const aceitos = evento.Convocacaos.filter((item) => item.dataAceitacao != null).length %>
-                        <h5 class="card-title"><%= evento.nome %> - Aceites [<%= aceitos %>/<%= evento.Convocacaos.length %>]</h5>
+                        <h5 class="card-title"><%= evento.nome %> - Aceites [<%= aceitos %>/<%= evento.qtdeProfissionais %>]</h5>
 
                         <p class="card-text">Data: <%= moment(evento.data).format("DD/MM/YYYY"); %> - Início: <%= (evento.inicioJornada).slice(0,5) %> - Término: <%= (evento.terminoJornada).slice(0,5) %> </p>
                         <!-- <h6 class="card-subtitle mb-2 text-muted">Endereço:</h6> -->
-                        <p class="card-text">Endereço: <%= evento.endereco + "," + evento.complemento + " - " + evento.bairro + " - " + evento.cidade + " - " + evento.estado %></p>
+                        <p class="card-text">Endereço: <%= evento.endereco + "," + evento.numero + " - " + evento.complemento + " - " + evento.bairro + " - " + evento.cidade + " - " + evento.estado %></p>
                         <!-- <h6 class="card-subtitle mb-2 text-muted">Descrição:</h6> -->
                         <p class="card-text">Descrição: <%= evento.descricao %></p>
                         <!-- <p class="card-text">Aceites [0/10] </p> -->
-                        <a href="/convoca/evento/<%= evento.id %>" class="card-link">Convocar</a>
+                        <% if(aceitos >= evento.qtdeProfissionais) { ocultar = "d-none"} else { ocultar = ""} %>
+                        <a href="/convoca/evento/<%= evento.id %>" class="card-link <%= ocultar %>">Convocar</a>
                         <!-- <a href="#" class="card-link">Another link</a> -->
                         </div>
                     </div>

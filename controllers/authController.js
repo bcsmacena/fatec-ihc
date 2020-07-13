@@ -38,7 +38,7 @@ const authController = {
       if (!empresa || !bcrypt.compareSync(senha, empresa.senha)) {
         console.log("errou");
         return res.render("auth/login", {
-          msg: "Email ou senha errados!",
+          msg: "Email ou senha inválidos!",
         });
       }
 

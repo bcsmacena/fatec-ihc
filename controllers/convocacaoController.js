@@ -1,5 +1,6 @@
 const { Evento, Contrato, Colaborador, Convocacao } = require('../models')
 const Sequelize = require('sequelize')
+const { Op } = require("sequelize");
 
 const moment = require('moment');
 
@@ -12,20 +13,72 @@ const convocacaoController = {
         try{
             const evento = await Evento.findByPk(idEvento);
 
-            const contratos = await Contrato.findAll({ 
-                where: { empresa_id: idLogado },
-                include:
-                       [{
-                            model: Colaborador,
-                            required: true,
-                       }]
-            })
+            if(req.query.search && req.query.sexo) {
+                const contratos = await Contrato.findAll({ 
+                    where: { empresa_id: idLogado },
+                    include:
+                        [{
+                                model: Colaborador,
+                                required: true,
+                                where: Sequelize.and({ nome: {[Op.like]: req.query.search + '%'}}, { sexo: req.query.sexo })
+                        }]
+                })
+                const convocacao = await Convocacao.findAll({
+                         where: { evento_id: idEvento}
+                 })
 
-            const convocacao = await Convocacao.findAll({
-                where: { evento_id: idEvento}
-            })
+                return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment})
+            }
+            else if(!req.query.search && req.query.sexo){
+                const contratos = await Contrato.findAll({ 
+                    where: { empresa_id: idLogado },
+                    include:
+                        [{
+                                model: Colaborador,
+                                required: true,
+                                where: { sexo: req.query.sexo }
+                        }]
+                })
+                const convocacao = await Convocacao.findAll({
+                         where: { evento_id: idEvento}
+                 })
 
-            return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment})
+                return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment})
+
+            }
+            else if(req.query.search && !req.query.sexo){
+                const contratos = await Contrato.findAll({ 
+                    where: { empresa_id: idLogado },
+                    include:
+                        [{
+                                model: Colaborador,
+                                required: true,
+                                where: { nome: {[Op.like]: req.query.search + '%'} }
+                        }]
+                })
+                const convocacao = await Convocacao.findAll({
+                         where: { evento_id: idEvento}
+                 })
+
+                return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment})
+
+            } else {
+                const contratos = await Contrato.findAll({ 
+                    where: { empresa_id: idLogado },
+                    include:
+                        [{
+                                model: Colaborador,
+                                required: true,
+                        }]
+                })
+                const convocacao = await Convocacao.findAll({
+                         where: { evento_id: idEvento}
+                 })
+
+                return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment})
+
+            }
+
         }
         catch(e){
             return res.send(e);
@@ -74,17 +127,39 @@ const convocacaoController = {
         }
     },
     aceita: async(req,res) => {
-        const { id } = req.params
+        const { id, eventoId } = req.params
 
         const date = new Date();
         
         try {
-            const convocacao = Convocacao.update({ 
-                dataAceitacao: date 
-            },{
-                where: { id: id },
+            const convocados = await Convocacao.findAll({ where: Sequelize.and({evento_id: eventoId},{dataAceitacao: {[Op.not]: null}})})
+            
+            console.log(convocados.length)
+
+            if(convocados.length > 0){
+
+                const evento = await Evento.findOne({ where: { id: eventoId }})
+
+                if(convocados.length >= evento.qtdeProfissionais){
+                    req.session.msg = "As vagas para esse evento já foram preenchidas!"
+                    const convocacao = await Convocacao.update({ 
+                        dataRecusa: date 
+                    },{
+                        where: Sequelize.and({dataAceitacao: null },{dataRecusa: null }),
+                        
+                    })
+                    return res.redirect('/colaborador')
+                }
                 
+
+            }
+            const convocacao = await Convocacao.update({ 
+                    dataAceitacao: date 
+                },{
+                    where: { id: id },
+                    
             })
+            
             return res.redirect('/colaborador')
         }
         catch(e){
@@ -98,7 +173,7 @@ const convocacaoController = {
         const date = new Date();
         
         try {
-            const convocacao = Convocacao.update({ 
+            const convocacao = await Convocacao.update({ 
                 dataRecusa: date 
             },{
                 where: { id: id },

@@ -6,7 +6,7 @@ const cadastroColaboradorController = {
         res.render('cadastro/colaborador');
     },
     store: async(req,res) => {
-        const { cpf, nome, dataNascimento, sexo, cep, endereco, complemento, bairro, cidade, estado, telefone, email, senha } = req.body
+        const { cpf, nome, dataNascimento, sexo, cep, endereco, numero, complemento, bairro, cidade, estado, telefone, email, senha } = req.body
 
         const hashPassword = bcrypt.hashSync(senha, 10);
 
@@ -24,6 +24,7 @@ const cadastroColaboradorController = {
                 sexo: attrSexo,
                 cep,
                 endereco,
+                numero,
                 complemento,
                 bairro,
                 cidade,

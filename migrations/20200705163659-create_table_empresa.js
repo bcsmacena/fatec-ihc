@@ -43,6 +43,11 @@ module.exports = {
           type: Sequelize.STRING(150),
           allowNull: false
         },
+        numero:
+        {
+          type: Sequelize.INTEGER,
+          allowNull: false
+        },
         complemento:
         {
           type: Sequelize.STRING(150),
@@ -65,7 +70,7 @@ module.exports = {
         },
         telefone:
         {
-          type: Sequelize.STRING(11),
+          type: Sequelize.STRING(15),
           allowNull: false
         },
         responsavel:

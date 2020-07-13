@@ -8,14 +8,16 @@ const cadastroEventoController = {
     },
     store: async(req,res) => {
 
-        const { nome, cep, endereco, complemento, bairro, cidade, estado, data, inicioJornada, terminoJornada, descricao, idLogado } = req.body
+        const { nome, qtdeProfissionais, cep, endereco, numero, complemento, bairro, cidade, estado, data, inicioJornada, terminoJornada, descricao, idLogado } = req.body
     
         try{
             const novoEvento = await Evento.create({
                 empresa_id: idLogado,
+                qtdeProfissionais,
                 nome,
                 cep,
                 endereco,
+                numero,
                 complemento,
                 bairro,
                 cidade,

@@ -18,6 +18,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
+        qtdeProfissionais: 
+        {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
         descricao: 
         {
             type: DataTypes.STRING,
@@ -37,6 +42,11 @@ module.exports = (sequelize, DataTypes) => {
         {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        numero:
+        {
+            type: DataTypes.INTEGER,
+            allowNull: true,
         },
         complemento:
         {

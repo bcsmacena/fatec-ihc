@@ -39,6 +39,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        numero:
+        {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
         complemento:
         {
             type: DataTypes.STRING,

@@ -27,6 +27,11 @@ module.exports = {
           type: Sequelize.STRING(100),
           allowNull: false,
         },
+        qtdeProfissionais: 
+        {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
         data:
         {
           type: Sequelize.DATEONLY,
@@ -56,6 +61,11 @@ module.exports = {
         {
           type: Sequelize.STRING(150),
           allowNull: false
+        },
+        numero:
+        {
+          type: Sequelize.INTEGER,
+          allowNull: true
         },
         complemento:
         {

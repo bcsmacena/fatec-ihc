@@ -10,7 +10,9 @@ const colaboradorController = {
     index: async (req, res) => {
 
         const idLogado = req.session.user.id;
-
+        const msg = req.session.msg;
+        req.session.msg = "";
+        
         try{
             const colaborador = await Colaborador.findByPk(idLogado,{ 
             include: 
@@ -32,7 +34,7 @@ const colaboradorController = {
             }]}    
                 
             );
-            return res.render('colaborador', {colaborador, moment});
+            return res.render('colaborador', {colaborador, moment, msg});
         }
         catch(e){
             console.log(e)

@@ -25,8 +25,15 @@
                 <div class='col-sm-12 text-danger text-left pl-0' >Campos com * são de preenchimento obrigatório</div>
             </div> 
             <div class="form-group">
-              <label for="nome">* Nome:</label>
-              <input type="nome" class="form-control" name="nome" id="nome" aria-describedby="nome" placeholder="" required>
+                <div class="row mb-3 d-flex flex-wrap">
+                    <div class="col-sm-7">
+                        <label for="nome">* Nome:</label>
+                        <input type="nome" class="form-control" name="nome" id="nome" aria-describedby="nome" placeholder="" required>
+                    </div>
+                    <div class="col">
+                        <label for="qtdeProfissionais">* Qtde de Profissionais:</label>
+                        <input type="number" class="form-control" name="qtdeProfissionais" id="qtdeProfissionais" aria-describedby="qtdeProfissionais" placeholder="" required>
+                    </div>
             </div>
             <div class="form-group">
                 <label for="cep">* CEP:</label>
@@ -40,23 +47,30 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="nome">* Endereço:</label>
+                <label for="endereco">* Endereço:</label>
                 <input type="text" class="form-control" name="endereco" id="endereco" aria-describedby="endereco" placeholder="" required>
             </div>
             <div class="form-group">
-                <label for="nome">* Número e Complemento:</label>
-                <input type="text" class="form-control" name="complemento" id="endereco" aria-describedby="endereco" placeholder="" required>
+                <div class="row mb-3">
+                    <div class="col-sm-3">
+                        <label for="numero">* Número</label>
+                        <input type="text" class="form-control" name="numero" id="numero" aria-describedby="numero" placeholder="" required>
+                    </div>
+                    <div class="col">
+                        <label for="complemento">Complemento:</label>
+                        <input type="text" class="form-control" name="complemento" id="complemento" aria-describedby="complemento" placeholder="">
+                    </div>
             </div>
             <div class="form-group">
                 <label for="bairro">* Bairro:</label>
                 <input type="text" class="form-control" name="bairro" id="bairro" aria-describedby="bairro" placeholder="" required>
             </div>
             <div class="form-group">
-                <label for="nome">* Cidade:</label>
+                <label for="cidade">* Cidade:</label>
                 <input type="text" class="form-control" name="cidade" id="cidade" aria-describedby="cidade" placeholder="" required>
             </div>
             <div class="form-group">
-                <label for="nome">* Estado:</label>
+                <label for="estado">* Estado:</label>
                 <input type="text" class="form-control" name="estado" id="estado" aria-describedby="estado" placeholder="" required>
             </div>
             <div class="form-group">

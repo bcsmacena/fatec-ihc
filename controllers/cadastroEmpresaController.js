@@ -6,7 +6,7 @@ const cadastroEmpresaController = {
         res.render('cadastro/empresa');
     },
     store: async(req,res) => {
-        const { cnpj, razaoSocial, nomeFantasia, atuacao, cep, endereco, complemento, bairro, cidade, estado, telefone, responsavel, email, senha } = req.body
+        const { cnpj, razaoSocial, nomeFantasia, atuacao, cep, endereco, numero, complemento, bairro, cidade, estado, telefone, responsavel, email, senha } = req.body
 
         const hashPassword = bcrypt.hashSync(senha, 10);
 
@@ -18,6 +18,7 @@ const cadastroEmpresaController = {
                 atuacao,
                 cep,
                 endereco,
+                numero,
                 complemento,
                 bairro,
                 cidade,

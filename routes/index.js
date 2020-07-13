@@ -44,8 +44,8 @@ router.post('/cadastro/evento', auth, cadastroEventoController.store);
 router.get('/convoca/evento/:id', auth, convocacaoController.index);
 router.get('/convoca/evento/:eventoId/:contratoId', auth, convocacaoController.store);
 
-router.get('/aceita/:id', auth, convocacaoController.aceita)
-router.get('/recusa/:id', auth, convocacaoController.recusa)
+router.get('/aceita/:id/:eventoId', auth, convocacaoController.aceita)
+router.get('/recusa/:id/:eventoId', auth, convocacaoController.recusa)
 
 router.get('/cadastro/evento', auth,  (req, res) => res.render('cadastro/evento'));
 
@@ -61,6 +61,8 @@ router.get('/contratos', auth, (req,res) => res.render('contratos'));
 router.get('/empresa/eventos', auth, eventoController.index);
 
 router.get('/teste', (req,res) => res.render('teste'));
+
+router.get('/testecheckbox', (req, res) =>  console.log(req.body))
 
 
 module.exports = router;
