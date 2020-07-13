@@ -10,7 +10,7 @@ const cadastroColaboradorController = {
 
         const hashPassword = bcrypt.hashSync(senha, 10);
 
-        if(sexo == "feminino"){
+        if(sexo == "Feminino"){
             attrSexo = "f";
         } else {
             attrSexo = "m";
