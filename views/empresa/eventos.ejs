@@ -42,13 +42,15 @@
 
                     <div class="card">
                         <div class="card-body">
-                        <h5 class="card-title"><%= evento.nome %></h5>
-                        <p class="card-text">Data: <%= moment(evento.data).format("DD/MM/YYYY"); %> - Início: <%= evento.inicioJornada %> - Término: <%= evento.terminoJornada %> </p>
-                        <h6 class="card-subtitle mb-2 text-muted">Endereço:</h6>
-                        <p class="card-text"><%= evento.endereco + "," + evento.complemento + " - " + evento.bairro + " - " + evento.cidade + " - " + evento.estado %></p>
-                        <h6 class="card-subtitle mb-2 text-muted">Descrição:</h6>
-                        <p class="card-text"><%= evento.descricao %></p>
-                        <p class="card-text">Aceites [0/10] </p>
+                            <% const aceitos = evento.Convocacaos.filter((item) => item.dataAceitacao != null).length %>
+                        <h5 class="card-title"><%= evento.nome %> - Aceites [<%= aceitos %>/<%= evento.Convocacaos.length %>]</h5>
+
+                        <p class="card-text">Data: <%= moment(evento.data).format("DD/MM/YYYY"); %> - Início: <%= (evento.inicioJornada).slice(0,5) %> - Término: <%= (evento.terminoJornada).slice(0,5) %> </p>
+                        <!-- <h6 class="card-subtitle mb-2 text-muted">Endereço:</h6> -->
+                        <p class="card-text">Endereço: <%= evento.endereco + "," + evento.complemento + " - " + evento.bairro + " - " + evento.cidade + " - " + evento.estado %></p>
+                        <!-- <h6 class="card-subtitle mb-2 text-muted">Descrição:</h6> -->
+                        <p class="card-text">Descrição: <%= evento.descricao %></p>
+                        <!-- <p class="card-text">Aceites [0/10] </p> -->
                         <a href="/convoca/evento/<%= evento.id %>" class="card-link">Convocar</a>
                         <!-- <a href="#" class="card-link">Another link</a> -->
                         </div>

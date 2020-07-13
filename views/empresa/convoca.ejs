@@ -70,15 +70,16 @@
                 </div>
             </div>
             <% contratos.forEach(contrato => { %>
-                <%# if(contrato.Convocacaos.dataConvocacao){ ocultar="" } else { ocultar=""}  %>
+                <%  convocado = convocacao.find((i) => i.contrato_id == contrato.id) %>
+                <% if(convocado) { ocultar="d-none";  } else { ocultar=""}  %>
                 <div><%#= contrato.Colaborador.nome + " - " + contrato.Colaborador.sexo + " - " + contrato.funcao + " - " + contrato.valorHora %></div>
-                <div class="card text-center mb-2 <%#= ocultar %>">
+                <div class="card text-center mb-2 <%= ocultar %>">
                     <div class="card-header text-left bg-white">
                         <div class="container">
                             <div class="row">
                                 <div class="col col-12 col-lg-6 d-flex align-items-center mb-2 pl-0">
                                     <input class="form-check-input position-static m-1 checkbox" type="checkbox" id="blankCheckbox-<%= contrato.Colaborador.nome %>" value="option<%= contrato.Colaborador.id %>" aria-label="...">
-                                    <%= contrato.Colaborador.nome %> - <%= contrato.funcao %>
+                                    <%= contrato.Colaborador.nome %> - <%= contrato.funcao %> - <%#= mensagem %>
                                 </div>
                                     
         

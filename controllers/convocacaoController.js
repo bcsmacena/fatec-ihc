@@ -21,7 +21,11 @@ const convocacaoController = {
                        }]
             })
 
-            return res.render('empresa/convoca', { idLogado, evento, contratos, moment})
+            const convocacao = await Convocacao.findAll({
+                where: { evento_id: idEvento}
+            })
+
+            return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment})
         }
         catch(e){
             return res.send(e);
@@ -40,7 +44,12 @@ const convocacaoController = {
             if(buscaConvocacao){ 
                 const eventos = await Evento.findAll({ 
                     where: { empresa_id: idLogado },
-                    })
+                    include: 
+                    [{
+                        model: Convocacao,
+                        require: true
+                    }]
+                })
     
                 return res.render('empresa/eventos', {eventos, moment, msg:'Colaborador já convocado'});
             }
@@ -51,6 +60,11 @@ const convocacaoController = {
             })
             const eventos = await Evento.findAll({ 
                 where: { empresa_id: idLogado },
+                include: 
+                [{
+                    model: Convocacao,
+                    require: true
+                }]
             })
 
             return res.render('empresa/eventos', {eventos, moment, msg:'Colaborador convocado com sucesso'});

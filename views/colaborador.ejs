@@ -18,9 +18,9 @@
             </div>
         </div>
         <div>
+            <% mensagem = "" %>
             <% colaborador.Contratos.forEach(contrato => { %>    
             <% contrato.Convocacaos.forEach(convocacao => { %>
-                    <% mensagem = "" %>
                     <% if(!convocacao.dataAceitacao && !convocacao.dataRecusa){ %>
                         <div class="card text-center ml-2 mb-2">
                             <h5 class="card-header">

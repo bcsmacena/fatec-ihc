@@ -65,7 +65,7 @@ module.exports = {
         },
         telefone:
         {
-          type: Sequelize.STRING(11),
+          type: Sequelize.STRING(15),
           allowNull: false
         },
         email:

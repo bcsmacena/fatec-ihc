@@ -81,9 +81,9 @@ module.exports = (sequelize, DataTypes) => {
         Evento.belongsTo(models.Empresa, {
             foreignKey: "empresa_id",
         });
-    //     Evento.hasMany(models.Convocacao, {
-    //         foreignKey: "evento_id",
-    //     });
+        Evento.hasMany(models.Convocacao, {
+            foreignKey: "evento_id",
+        });
     };
   
     return Evento;

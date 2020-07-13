@@ -10,7 +10,7 @@ inputConfirma.addEventListener("focusout", (e) => {
         alert("Senhas diferentes");
     }
     else{
-        alert("Senhas iguais");
+        // alert("Senhas iguais");
     }
 })
 
