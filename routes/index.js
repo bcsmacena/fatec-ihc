@@ -41,8 +41,9 @@ router.get('/cadastro/evento', auth, cadastroEventoController.index);
 router.post('/cadastro/evento', auth, cadastroEventoController.store);
 
 router.get('/convoca/evento/:id', auth, convocacaoController.index);
+router.get('/convoca/evento/:eventoId/:contratoId', auth, convocacaoController.store);
 
-router.get('/cadastro/evento', (req, res) => res.render('cadastro/evento'));
+router.get('/cadastro/evento', auth,  (req, res) => res.render('cadastro/evento'));
 
 router.get('/colaborador', auth, (req,res) => res.render('colaborador'));
 

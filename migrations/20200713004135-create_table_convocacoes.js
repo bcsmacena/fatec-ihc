@@ -12,13 +12,13 @@ module.exports = {
           allowNull: false,
           unique: true
         },
-        empresa_id:
+        evento_id:
         {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: 
           { 
-            model:'empresas',
+            model:'eventos',
             key: 'id'
           }
         },

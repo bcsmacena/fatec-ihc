@@ -49,6 +49,9 @@ module.exports = (sequelize, DataTypes) => {
         Contrato.belongsTo(models.Empresa, {
             foreignKey: "empresa_id",
         });
+        Contrato.hasMany(models.Convocacao, {
+            foreignKey: "contrato_id",
+        });
     };
   
     return Contrato;

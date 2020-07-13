@@ -1,0 +1,161 @@
+<%- include('../partials/head.ejs') %>
+<body>
+    <header>
+        <nav class="navbar sticky-top navbar-light bg-light">
+            <a class="navbar-brand" href="#">Trabalho Intermitente</a>
+            <a class="navbar-brand" href="/empresa"><i class="fa fa-undo"></i></a>
+        </nav>
+    </header>
+    <main class='container mt-4 col-lg-6'>
+        <div class='row'>
+            <div class='ml-3'>
+                <h2>Evento</h2>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='ml-3 my-4'>
+                <h3><%= evento.nome %> - <%= moment(evento.data).format("DD/MM/YYYY ") %></h3>
+            </div>
+        </div>
+        <%# console.log(contratos) %>
+
+
+        <% if(typeof contratos !== 'undefined' && contratos.length !== 0) { %>
+            <form class='col-sm-12 p-0' action="/empresa/convoca/<%= evento.id %>" method="">
+                <div class="form-group">
+                    <input type="search" class="form-control" name="search" id="search" placeholder="Pesquisar">
+                </div>
+                <div class="form-group">
+                    <div id="accordion">
+                        <div class="card">
+                          <div class="card-header p-0 " id="headingOne">
+                            <!-- <h5 class="mb-0"> -->
+                              <button class="btn btn-secondary " data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Filtros
+                              </button>
+                            <!-- </h5> -->
+                          </div>
+                      
+                          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                      Masculino
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                    <label class="form-check-label" for="exampleRadios2">
+                                      Feminino
+                                    </label>
+                                  </div>
+                            </div>
+                            <div class="form-group d-flex pl-2">
+                                <label for="idade">Idade</label>
+                                <input type="number" class="form-control">
+                            </div>
+                          </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+    
+            <div class="form-check pl-0">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <a href="#" class="btn btn-secondary col-12 col-lg-5 mb-2 mr-0"  onclick="eventCheckBox()">Selecionar todos </a>
+                    <a href="#" class="btn btn-success col-12 col-lg-5 mb-2">Convocar todos os selecionados</a>
+                </div>
+            </div>
+            <% contratos.forEach(contrato => { %>
+                <%# if(contrato.Convocacaos.dataConvocacao){ ocultar="" } else { ocultar=""}  %>
+                <div><%#= contrato.Colaborador.nome + " - " + contrato.Colaborador.sexo + " - " + contrato.funcao + " - " + contrato.valorHora %></div>
+                <div class="card text-center mb-2 <%#= ocultar %>">
+                    <div class="card-header text-left bg-white">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col col-12 col-lg-6 d-flex align-items-center mb-2 pl-0">
+                                    <input class="form-check-input position-static m-1 checkbox" type="checkbox" id="blankCheckbox-<%= contrato.Colaborador.nome %>" value="option<%= contrato.Colaborador.id %>" aria-label="...">
+                                    <%= contrato.Colaborador.nome %> - <%= contrato.funcao %>
+                                </div>
+                                    
+        
+                                    <div class="col d-flex justify-content-end  col-12 col-lg-6 pr-0 ">
+                                        <a class="btn btn-info ml-1" data-toggle="collapse" href="#collapse-<%= contrato.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">Informações</a>
+                                        <a href="/convoca/evento/<%= evento.id %>/<%= contrato.id %>" class="btn btn-success ml-1">Convocar</a>
+                                        <!-- <a href="#" class="btn btn-danger ml-1">Excluir</a> -->
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse" id="collapse-<%= contrato.id %>">
+                        <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home-<%= contrato.id %>" role="tab" aria-controls="nav-home" aria-selected="true">Dados</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile-<%= contrato.id %>" role="tab" aria-controls="nav-profile" aria-selected="false">Contrato</a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact-<%= contrato.id %>" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+                            </li> -->
+                        </ul>
+                        </div>
+                
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="nav-home-<%= contrato.id %>" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <div class="card-body">
+                                    <h5 class="card-title text-left"><%= contrato.Colaborador.nome %></h5>
+                                    <p class="card-text text-left">Email: <%= contrato.Colaborador.email %></p>
+                                    <p class="card-text text-left">Telefone: <%= contrato.Colaborador.telefone %></p>
+                                    <p class="card-text text-left">Nascimento: <%= moment(contrato.Colaborador.dataNascimento).format("DD/MM/YYYY") %></p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-profile-<%= contrato.id %>" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                <div class="card-body">
+                                    <h5 class="card-title text-left">Função: <%= contrato.funcao %></h5>
+                                    <p class="card-text text-left">Valor hora: R$ <%= contrato.valorHora %> </p>
+                                    <!-- <p class="card-text text-left">Jornada de trabalho: <%= contrato.inicioJornada %> - <%= contrato.terminoJornada %></p> -->
+                                    <p class="card-text text-left">Descrição: <%= contrato.descricao %> </p>
+
+                                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                                </div>
+                            </div>
+                            <!-- <div class="tab-pane fade" id="nav-contact-<%= contrato.id %>" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <div class="text-center"> Não encontramos nenhum contrato disponível para convocação :( </div>
+        <% } %>
+
+        </div>
+
+
+        
+    </main>
+
+    <%- include('../partials/jsBootstrap.ejs') %>
+
+    <script>
+        function eventCheckBox() {
+            let checkboxs = document.getElementsByClassName('checkbox');
+            for(let i = 0; i < checkboxs.length ; i++) {
+                checkboxs[i].checked = !checkboxs[i].checked;
+            }
+        }
+    </script>
+
+
+</body>
+</html>

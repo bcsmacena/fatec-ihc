@@ -11,6 +11,9 @@
             <div class='ml-3'>
                 <h2>Eventos</h2>
             </div>
+            <% if( typeof msg !== 'undefined'){ %>
+                <div class='col-sm-12 p-1 bg-danger text-light text-center' id='mensagem' ><%= msg %></div>
+            <% } %>
         </div>
         <!-- <div class='row'>
             <div class='ml-3 mt-4'>
@@ -36,10 +39,13 @@
         <% eventos.forEach(evento => { %>
             <div class='row'>
                 <div class='ml-3 pl-0 mt-4 col-12'>
+
                     <div class="card">
                         <div class="card-body">
                         <h5 class="card-title"><%= evento.nome %></h5>
-                        <p class="card-text">Data: <%= evento.data %> - Início: <%= evento.inicioJornada %> - Término: <%= evento.terminoJornada %> </p>
+                        <p class="card-text">Data: <%= moment(evento.data).format("DD/MM/YYYY"); %> - Início: <%= evento.inicioJornada %> - Término: <%= evento.terminoJornada %> </p>
+                        <h6 class="card-subtitle mb-2 text-muted">Endereço:</h6>
+                        <p class="card-text"><%= evento.endereco + "," + evento.complemento + " - " + evento.bairro + " - " + evento.cidade + " - " + evento.estado %></p>
                         <h6 class="card-subtitle mb-2 text-muted">Descrição:</h6>
                         <p class="card-text"><%= evento.descricao %></p>
                         <p class="card-text">Aceites [0/10] </p>

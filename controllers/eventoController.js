@@ -1,6 +1,8 @@
 const { Evento } = require('../models')
 const Sequelize = require('sequelize')
 
+const moment = require('moment')
+
 const eventoController = {
     index: async (req, res) => {
 
@@ -9,14 +11,9 @@ const eventoController = {
         try{
             const eventos = await Evento.findAll({ 
                 where: { empresa_id: idLogado },
-                // include:
-                //         [{
-                //             model: Empresa,
-                //             required: true,
-                //         }],
-                })
+            })
 
-            return res.render('empresa/eventos', {eventos});
+            return res.render('empresa/eventos', {eventos, moment});
         }
         catch(e){
             return res.render(e);
