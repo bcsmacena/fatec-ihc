@@ -16,8 +16,8 @@
             </div>
         </div>
         <div class='row'>
-            <div class='ml-5 mt-4'>
-                <p>Lista de notificações:</p>
+            <div class='ml-4 my-4'>
+                <h4>Notificações:</h4>
             </div>
         </div>
         <div>
@@ -29,7 +29,7 @@
                     <% if(!convocacao.dataAceitacao && !convocacao.dataRecusa){ %>
                         <div class="card text-center ml-2 mb-2">
                             <h5 class="card-header">
-                                <%= moment(convocacao.Evento.data).format("DD/MM/YYYY") %>
+                                <%= convocacao.Evento.nome + " - " + moment(convocacao.Evento.data).format("DD/MM/YYYY") %>
                                 - <% console.log(convocacao.Evento.nome) %>
                                 <%= (convocacao.Evento.inicioJornada).slice(0,5) %> às <%= (convocacao.Evento.terminoJornada).slice(0,5) %>
                             </h5>

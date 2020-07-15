@@ -8,12 +8,12 @@
     </header>
     <main class='container mt-4 col-lg-6'>
         <div class='row'>
-            <div class='ml-3'>
+            <div class='ml col-sm-12'>
                 <h2>Eventos</h2>
+                <% if( typeof msg !== 'undefined'){ %>
+                    <div class='col-sm-12 p-1 bg-danger text-light text-center' id='mensagem' ><%= msg %></div>
+                <% } %>
             </div>
-            <% if( typeof msg !== 'undefined'){ %>
-                <div class='col-sm-12 p-1 bg-danger text-light text-center' id='mensagem' ><%= msg %></div>
-            <% } %>
         </div>
         <!-- <div class='row'>
             <div class='ml-3 mt-4'>
