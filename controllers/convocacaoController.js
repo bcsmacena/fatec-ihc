@@ -9,6 +9,9 @@ const convocacaoController = {
 
         const idLogado = req.session.user.id;
         const idEvento = req.params.id;
+        const msg = req.session.msg;
+
+        req.session.msg = undefined;
 
         try{
             const evento = await Evento.findByPk(idEvento);
@@ -27,7 +30,7 @@ const convocacaoController = {
                          where: { evento_id: idEvento}
                  })
 
-                return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment})
+                return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
             }
             else if(!req.query.search && req.query.sexo){
                 const contratos = await Contrato.findAll({ 
@@ -43,7 +46,7 @@ const convocacaoController = {
                          where: { evento_id: idEvento}
                  })
 
-                return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment})
+                return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
 
             }
             else if(req.query.search && !req.query.sexo){
@@ -60,7 +63,7 @@ const convocacaoController = {
                          where: { evento_id: idEvento}
                  })
 
-                return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment})
+                return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
 
             } else {
                 const contratos = await Contrato.findAll({ 
@@ -75,7 +78,7 @@ const convocacaoController = {
                          where: { evento_id: idEvento}
                  })
 
-                return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment})
+                return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
 
             }
 
@@ -90,27 +93,76 @@ const convocacaoController = {
         const date = new Date();
 
         try{
-            const buscaConvocacao = await Convocacao.findOne({
-                where: Sequelize.and({evento_id: eventoId },{contrato_id: contratoId })
-            })
+            // const buscaConvocacao = await Convocacao.findOne({
+            //     where: Sequelize.and({evento_id: eventoId },{contrato_id: contratoId })
+            // })
 
-            if(buscaConvocacao){ 
-                const eventos = await Evento.findAll({ 
-                    where: { empresa_id: idLogado },
-                    include: 
-                    [{
-                        model: Convocacao,
-                        require: true
-                    }]
-                })
+            // if(buscaConvocacao){ 
+            //     const eventos = await Evento.findAll({ 
+            //         where: { empresa_id: idLogado },
+            //         include: 
+            //         [{
+            //             model: Convocacao,
+            //             require: true
+            //         }]
+            //     })
     
-                return res.render('empresa/eventos', {eventos, moment, msg:'Colaborador já convocado'});
-            }
+            //     return res.render('empresa/eventos', {eventos, moment, msg:'Colaborador já convocado'});
+            
             const convoca = await Convocacao.create({
                 evento_id: eventoId,
                 contrato_id: contratoId,
                 dataConvocacao: date
             })
+            // const eventos = await Evento.findAll({ 
+            //     where: { empresa_id: idLogado },
+            //     include: 
+            //     [{
+            //         model: Convocacao,
+            //         require: true
+            //     }]
+            // })
+
+            req.session.msg = 'Colaborador convocado com sucesso'
+
+            return res.redirect('/convoca/evento/' + eventoId)
+        }
+        catch(e){
+            return res.send(e);
+        }
+    },
+    lote: async(req,res) => {
+
+        const { eventoId } = req.params;
+        const { checkbox } = req.body
+        const idLogado = req.session.user.id;
+        const date = new Date();
+
+        console.log(checkbox);
+
+        if(typeof checkbox != 'undefined' ){
+
+            checkbox.forEach(async contratoId =>  {
+
+            try{
+                const convoca = await Convocacao.create({
+                    evento_id: eventoId,
+                    contrato_id: contratoId,
+                    dataConvocacao: date
+                })
+                // console.log("convocou" + contratoId )
+            }
+            catch(e){
+                console.log(e)
+            }})
+
+            req.session.msg = 'Colaboradores convocados com sucesso'
+        } else {
+            req.session.msg = undefined
+        }
+
+        try{
+
             const eventos = await Evento.findAll({ 
                 where: { empresa_id: idLogado },
                 include: 
@@ -120,7 +172,9 @@ const convocacaoController = {
                 }]
             })
 
-            return res.render('empresa/eventos', {eventos, moment, msg:'Colaborador convocado com sucesso'});
+
+            return res.redirect('/convoca/evento/' + eventoId)
+            //return res.render('empresa/eventos', {eventos, moment, msg});
         }
         catch(e){
             return res.send(e);

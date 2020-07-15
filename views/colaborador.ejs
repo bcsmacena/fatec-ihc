@@ -24,11 +24,13 @@
             <% contador = 0; mensagem = "" %>
             <% colaborador.Contratos.forEach(contrato => { %>    
             <% contrato.Convocacaos.forEach(convocacao => { %>
+                    <% console.log(!convocacao.dataAceitacao && !convocacao.dataRecusa) %>
+                    
                     <% if(!convocacao.dataAceitacao && !convocacao.dataRecusa){ %>
                         <div class="card text-center ml-2 mb-2">
                             <h5 class="card-header">
                                 <%= moment(convocacao.Evento.data).format("DD/MM/YYYY") %>
-                                -
+                                - <% console.log(convocacao.Evento.nome) %>
                                 <%= (convocacao.Evento.inicioJornada).slice(0,5) %> às <%= (convocacao.Evento.terminoJornada).slice(0,5) %>
                             </h5>
                             <div class="card-body">

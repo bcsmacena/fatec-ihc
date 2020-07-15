@@ -42,7 +42,12 @@ router.get('/cadastro/evento', auth, cadastroEventoController.index);
 router.post('/cadastro/evento', auth, cadastroEventoController.store);
 
 router.get('/convoca/evento/:id', auth, convocacaoController.index);
+
+router.post('/convoca/lote/evento/:eventoId', auth, convocacaoController.lote);
+
 router.get('/convoca/evento/:eventoId/:contratoId', auth, convocacaoController.store);
+
+
 
 router.get('/aceita/:id/:eventoId', auth, convocacaoController.aceita)
 router.get('/recusa/:id/:eventoId', auth, convocacaoController.recusa)
