@@ -8,18 +8,19 @@
     </header>
     <main class='container mt-4 col-lg-6'>
         <div class='row'>
-            <div class='ml-3'>
+            <div class='ml-3 mb-4'>
+                <h2><%= evento.nome %> - <%= moment(evento.data).format("DD/MM/YYYY ") %></h2>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-sm-12' style="height: 30px;">
                 <!-- <h2>Evento</h2> -->
                 <% if( typeof msg !== 'undefined'){ %>
                     <div class='col-sm-12 p-1 bg-danger text-light text-center' id='msg' ><%= msg %></div>
                 <% } %>
             </div>
         </div>
-        <div class='row'>
-            <div class='ml-3 my-4'>
-                <h3><%= evento.nome %> - <%= moment(evento.data).format("DD/MM/YYYY ") %></h3>
-            </div>
-        </div>
+
         <%# console.log(contratos) %>
 
         <div class="form-group">
