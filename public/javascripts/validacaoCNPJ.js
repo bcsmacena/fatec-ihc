@@ -6,7 +6,7 @@ inputCnpj.addEventListener("keypress", (e) => {
       e.preventDefault();
       inputCnpj.focus();
       return;
-  }
+  } 
    mascaraCNPJ(inputCnpj);
 })
 
@@ -22,18 +22,29 @@ inputCnpj.addEventListener("focusout", (e) => {
     const cnpj = inputCnpj.value;
     const validacnpj = validarCNPJ(cnpj)
     mascaraCNPJ(inputCnpj);
-    inputCnpj.style.background = '#ffffff'
-    alertaCNPJ.innerText = ""
-
+    
     if (!validacnpj){
         //alert("CNPJ Inválido.");
-        inputCnpj.style.background = '#fff0f0'
-        alertaCNPJ.innerText = "Inválido!"
-        alertaCNPJ.style.color = '#dc3545'
+        addAlerta(inputCnpj)
         inputCnpj.focus();
+    } else {
+        removeAlerta(inputCnpj)
     }
+
+
     
 })
+
+function addAlerta(campo){
+    campo.style.background = '#fff0f0'
+    alertaCNPJ.innerText = "Inválido!"
+    alertaCNPJ.style.color = '#dc3545'
+}
+function removeAlerta(campo){
+    campo.style.background = '#ffffff'
+    alertaCNPJ.innerText = ""
+}
+
 
 
 

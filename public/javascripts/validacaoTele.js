@@ -4,7 +4,7 @@ const inputTele = document.querySelector("#telefone");
 inputTele.addEventListener("keypress", (e) => {
   if(telefone.value.length >= 15 || e.keyCode < 48 || e.keyCode > 57){
       e.preventDefault();
-      inputTele.focus();
+      // inputTele.focus();
       return;
   }
 })
