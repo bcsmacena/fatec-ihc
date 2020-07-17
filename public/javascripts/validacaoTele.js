@@ -1,24 +1,22 @@
 const inputTele = document.querySelector("#telefone");
 
+
 inputTele.addEventListener("keypress", (e) => {
-  if(telefone.value.length >= 15){
+  if(telefone.value.length >= 15 || e.keyCode < 48 || e.keyCode > 57){
       e.preventDefault();
       inputTele.focus();
       return;
   }
 })
 
-inputTele.addEventListener("focusout", (e) => {
-    const telefone = inputTele.value;
-    const validaTele = validatePhone(telefone)
-
-if (!validaTele){
-    alert("Insira um telefone válido.");
-
+function mascara( campo ) {
+if (inputTele.value.length == 10) { 
+        campo.value = campo.value.replace( /[^\d]/g, '' )
+                                 .replace( /^(\d\d)(\d)/, '($1) $2' )
+                                 .replace( /(\d{4})(\d)/, '$1-$2' );
+         } else {
+                 campo.value = campo.value.replace( /[^\d]/g, '' )
+                                          .replace( /^(\d\d)(\d)/, '($1) $2' )
+                                          .replace( /(\d{4})(\d)/, '$1-$2' );
     }
-})
-
-function validatePhone (telefone) {
-    var regex = new RegExp(/(\(?\d{2}\)?\s)?(\d{4,5}\-\d{4})/g); 
-    return regex.test(telefone);
 }
