@@ -115,7 +115,7 @@
                                     <h5 class="card-title text-left"><%= contrato.Colaborador.nome %></h5>
                                     <p class="card-text text-left">Email: <%= contrato.Colaborador.email %></p>
                                     <p class="card-text text-left">Telefone: <%= contrato.Colaborador.telefone %></p>
-                                    <p class="card-text text-left">Nascimento: <%= contrato.Colaborador.dataNascimento %></p>
+                                    <p class="card-text text-left">Data de Nascimento: <%= moment(contrato.Colaborador.dataNascimento).format("DD/MM/YYYY") %></p>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="nav-profile-<%= contrato.id %>" role="tabpanel" aria-labelledby="nav-profile-tab">

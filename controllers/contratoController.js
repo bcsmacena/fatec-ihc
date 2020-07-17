@@ -2,6 +2,8 @@ const { Contrato, Empresa, Colaborador } = require('../models')
 const Sequelize = require('sequelize')
 const { Op } = require('sequelize');
 
+const moment = require('moment');
+
 const contratoController = {
     index: async (req, res) => {
 
@@ -38,7 +40,7 @@ const contratoController = {
                                 // right: true
                             }],
                     })
-                    return res.render('empresa/colaboradores', { contratos });
+                    return res.render('empresa/colaboradores', { contratos, moment });
             }
             else if(req.query.search && !req.query.sexo) {
                 const contratos = await Contrato.findAll({ 
@@ -52,7 +54,7 @@ const contratoController = {
                                 // right: true
                             }],
                     })
-                    return res.render('empresa/colaboradores', { contratos });
+                    return res.render('empresa/colaboradores', { contratos, moment });
             }
             else {
                 const contratos = await Contrato.findAll({ 
@@ -65,7 +67,7 @@ const contratoController = {
                                 // right: true
                             }],
                     })
-                return res.render('empresa/colaboradores', { contratos });
+                return res.render('empresa/colaboradores', { contratos, moment });
             }
             
         }
