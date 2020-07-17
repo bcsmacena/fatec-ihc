@@ -24,10 +24,10 @@
         <%# console.log(contratos) %>
 
         <div class="form-group">
-            <div class="card">
-                <div class="card-body">
+            <div class="card ">
+                <div class="card-body ">
                     <form id='exibe' class='col-sm-12 p-0' action="/convoca/evento/<%= evento.id %>" method="GET">
-                        <div class='row'>
+                        <!-- <div class='row'>
                             <div class='col-sm-9'>
                                 <div class="form-group">
                                     <input type="search" class="form-control form-control-lg" name="search" id="search" placeholder="Nome do colaborador">
@@ -48,6 +48,40 @@
                                 </div>
                             </div>
                             
+                        </div> -->
+                        <div class='row'>
+                            <div class='col'>
+                                <div class="form-group">
+                                    <input type="search" class="form-control form-control-md" name="search" id="search" placeholder="Nome do colaborador">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <select class="form-control" id="funcao" name="funcao">
+                                  <option value="" disabled selected hidden>Selecione uma função...</option>
+                                  <option>Pintor</option>
+                                  <option>Carpinteiro</option>
+                                  <option>Eletricista</option>
+                                  <option>Marceneiro</option>
+                                  <option>Vidraceiro</option>
+                                  <option>Pedreiro</option>
+                                </select>
+                            </div>                                    
+                        </div>
+                        <div class="row">
+                            <div class='col ml-3'>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sexo" id="Masculino" value="m">
+                                    <label class="form-check-label" for="Masculino">
+                                    Masculino
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sexo" id="Feminino" value="f">
+                                    <label class="form-check-label" for="Feminino">
+                                    Feminino
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <div class='row mt-4'>
                             <div class='col-sm-12 col-lg-6 '>
@@ -70,7 +104,7 @@
         <form action="/convoca/lote/evento/<%= evento.id %>" method="POST">
             <% contador = 0; if(typeof contratos !== 'undefined' && contratos.length !== 0) { %>
 
-                    <div class='row' id='selecionarTodos'>
+                    <div class='row mx-2 my-4' id='selecionarTodos'>
                     <div class='col-sm-12 col-lg-6'>
                         <div class="form-check pl-0">
                             <a href="#selecionarTodos" class="form-control btn btn-secondary mb-2 mr-0"  onclick="eventCheckBox()">Selecionar todos </a>

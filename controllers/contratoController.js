@@ -14,7 +14,22 @@ const contratoController = {
 
         try{
 
-            if(req.query.search && req.query.sexo) {
+            if(req.query.search && req.query.sexo && req.query.funcao) {
+                const contratos = await Contrato.findAll({ 
+                    where: { empresa_id: idLogado,  funcao: req.query.funcao },
+                    include:
+                            [{
+                                model: Colaborador,
+                                // where:{ id: Sequelize.col('colaborador_id') },
+                                required: true,
+                                where: Sequelize.and({ nome: {[Op.like]: req.query.search + '%'}}, { sexo: req.query.sexo }),
+                                // right: true
+                            }],
+                    })
+                    return res.render('empresa/colaboradores', { contratos, moment });
+
+            }
+            else if(req.query.search && !req.query.sexo && !req.query.funcao) {
                 const contratos = await Contrato.findAll({ 
                     where: { empresa_id: idLogado },
                     include:
@@ -22,13 +37,27 @@ const contratoController = {
                                 model: Colaborador,
                                 // where:{ id: Sequelize.col('colaborador_id') },
                                 required: true,
-                                where: Sequelize.and({ nome: {[Op.like]: req.query.search + '%'}}, { sexo: req.query.sexo })
+                                where: { nome: {[Op.like]: req.query.search + '%'} }
                                 // right: true
                             }],
                     })
-                    return res.render('empresa/colaboradores', { contratos });
+                    return res.render('empresa/colaboradores', { contratos, moment });
+            }
+            else if(req.query.search && req.query.sexo && !req.query.funcao) {
+                const contratos = await Contrato.findAll({ 
+                    where: { empresa_id: idLogado },
+                    include:
+                            [{
+                                model: Colaborador,
+                                // where:{ id: Sequelize.col('colaborador_id') },
+                                required: true,
+                                where: Sequelize.and({ nome: {[Op.like]: req.query.search + '%'}}, { sexo: req.query.sexo }),
+                                // right: true
+                            }],
+                    })
+                    return res.render('empresa/colaboradores', { contratos, moment });
             }  
-            else if(!req.query.search && req.query.sexo) {
+            else if(!req.query.search && req.query.sexo && !req.query.funcao) {
                 const contratos = await Contrato.findAll({ 
                     where: { empresa_id: idLogado },
                     include:
@@ -42,19 +71,38 @@ const contratoController = {
                     })
                     return res.render('empresa/colaboradores', { contratos, moment });
             }
-            else if(req.query.search && !req.query.sexo) {
+             else if(!req.query.search && !req.query.sexo && req.query.funcao) {
                 const contratos = await Contrato.findAll({ 
-                    where: { empresa_id: idLogado },
+                    where: { empresa_id: idLogado, funcao: req.query.funcao },
                     include:
                             [{
                                 model: Colaborador,
-                                // where:{ id: Sequelize.col('colaborador_id') },
                                 required: true,
-                                where: { nome: {[Op.like]: req.query.search + '%'} }
-                                // right: true
                             }],
                     })
-                    return res.render('empresa/colaboradores', { contratos, moment });
+                    return res.render('empresa/colaboradores', { contratos, moment }); 
+            } else if(req.query.search && !req.query.sexo && req.query.funcao) {
+                const contratos = await Contrato.findAll({ 
+                    where: { empresa_id: idLogado, funcao: req.query.funcao },
+                    include:
+                            [{
+                                model: Colaborador,
+                                required: true,
+                                where:  { nome: {[Op.like]: req.query.search + '%'} },
+                            }],
+                    })
+                    return res.render('empresa/colaboradores', { contratos, moment }); 
+            }else if(!req.query.search && req.query.sexo && req.query.funcao) {
+                const contratos = await Contrato.findAll({ 
+                    where: { empresa_id: idLogado, funcao: req.query.funcao },
+                    include:
+                            [{
+                                model: Colaborador,
+                                required: true,
+                                where: { sexo: req.query.sexo },
+                            }],
+                    })
+                    return res.render('empresa/colaboradores', { contratos, moment }); 
             }
             else {
                 const contratos = await Contrato.findAll({ 

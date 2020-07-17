@@ -16,70 +16,216 @@ const convocacaoController = {
         try{
             const evento = await Evento.findByPk(idEvento);
 
-            if(req.query.search && req.query.sexo) {
+            // if(req.query.search && req.query.sexo) {
+            //     const contratos = await Contrato.findAll({ 
+            //         where: { empresa_id: idLogado },
+            //         include:
+            //             [{
+            //                     model: Colaborador,
+            //                     required: true,
+            //                     where: Sequelize.and({ nome: {[Op.like]: req.query.search + '%'}}, { sexo: req.query.sexo })
+            //             }]
+            //     })
+            //     const convocacao = await Convocacao.findAll({
+            //              where: { evento_id: idEvento}
+            //      })
+
+            //     return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
+            // }
+            // else if(!req.query.search && req.query.sexo){
+            //     const contratos = await Contrato.findAll({ 
+            //         where: { empresa_id: idLogado },
+            //         include:
+            //             [{
+            //                     model: Colaborador,
+            //                     required: true,
+            //                     where: { sexo: req.query.sexo }
+            //             }]
+            //     })
+            //     const convocacao = await Convocacao.findAll({
+            //              where: { evento_id: idEvento}
+            //      })
+
+            //     return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
+
+            // }
+            // else if(req.query.search && !req.query.sexo){
+            //     const contratos = await Contrato.findAll({ 
+            //         where: { empresa_id: idLogado },
+            //         include:
+            //             [{
+            //                     model: Colaborador,
+            //                     required: true,
+            //                     where: { nome: {[Op.like]: req.query.search + '%'} }
+            //             }]
+            //     })
+            //     const convocacao = await Convocacao.findAll({
+            //              where: { evento_id: idEvento}
+            //      })
+
+            //     return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
+
+            // } else {
+            //     const contratos = await Contrato.findAll({ 
+            //         where: { empresa_id: idLogado },
+            //         include:
+            //             [{
+            //                     model: Colaborador,
+            //                     required: true,
+            //             }]
+            //     })
+            //     const convocacao = await Convocacao.findAll({
+            //              where: { evento_id: idEvento}
+            //      })
+
+            //     return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
+
+            // }
+
+
+            if(req.query.search && req.query.sexo && req.query.funcao) {
                 const contratos = await Contrato.findAll({ 
-                    where: { empresa_id: idLogado },
+                    where: { empresa_id: idLogado,  funcao: req.query.funcao },
                     include:
-                        [{
+                            [{
                                 model: Colaborador,
+                                // where:{ id: Sequelize.col('colaborador_id') },
                                 required: true,
-                                where: Sequelize.and({ nome: {[Op.like]: req.query.search + '%'}}, { sexo: req.query.sexo })
-                        }]
-                })
+                                where: Sequelize.and({ nome: {[Op.like]: req.query.search + '%'}}, { sexo: req.query.sexo }),
+                                // right: true
+                            }],
+                    })
+                    
                 const convocacao = await Convocacao.findAll({
-                         where: { evento_id: idEvento}
-                 })
+                    where: { evento_id: idEvento}
+                })
+                    return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
 
-                return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
             }
-            else if(!req.query.search && req.query.sexo){
+            else if(req.query.search && !req.query.sexo && !req.query.funcao) {
                 const contratos = await Contrato.findAll({ 
                     where: { empresa_id: idLogado },
                     include:
-                        [{
+                            [{
                                 model: Colaborador,
-                                required: true,
-                                where: { sexo: req.query.sexo }
-                        }]
-                })
-                const convocacao = await Convocacao.findAll({
-                         where: { evento_id: idEvento}
-                 })
-
-                return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
-
-            }
-            else if(req.query.search && !req.query.sexo){
-                const contratos = await Contrato.findAll({ 
-                    where: { empresa_id: idLogado },
-                    include:
-                        [{
-                                model: Colaborador,
+                                // where:{ id: Sequelize.col('colaborador_id') },
                                 required: true,
                                 where: { nome: {[Op.like]: req.query.search + '%'} }
-                        }]
-                })
-                const convocacao = await Convocacao.findAll({
-                         where: { evento_id: idEvento}
-                 })
+                                // right: true
+                            }],
+                    })
 
-                return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
+                    const convocacao = await Convocacao.findAll({
+                        where: { evento_id: idEvento}
+                    })
 
-            } else {
+                    return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
+            }
+            else if(req.query.search && req.query.sexo && !req.query.funcao) {
                 const contratos = await Contrato.findAll({ 
                     where: { empresa_id: idLogado },
                     include:
-                        [{
+                            [{
+                                model: Colaborador,
+                                // where:{ id: Sequelize.col('colaborador_id') },
+                                required: true,
+                                where: Sequelize.and({ nome: {[Op.like]: req.query.search + '%'}}, { sexo: req.query.sexo }),
+                                // right: true
+                            }],
+                    })
+
+                    const convocacao = await Convocacao.findAll({
+                        where: { evento_id: idEvento}
+                    })
+
+                    return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
+            }  
+            else if(!req.query.search && req.query.sexo && !req.query.funcao) {
+                const contratos = await Contrato.findAll({ 
+                    where: { empresa_id: idLogado },
+                    include:
+                            [{
+                                model: Colaborador,
+                                // where:{ id: Sequelize.col('colaborador_id') },
+                                required: true,
+                                where: { sexo: req.query.sexo }
+                                // right: true
+                            }],
+                    })
+
+                    const convocacao = await Convocacao.findAll({
+                        where: { evento_id: idEvento}
+                    })
+
+                    return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
+            }
+             else if(!req.query.search && !req.query.sexo && req.query.funcao) {
+                const contratos = await Contrato.findAll({ 
+                    where: { empresa_id: idLogado, funcao: req.query.funcao },
+                    include:
+                            [{
                                 model: Colaborador,
                                 required: true,
-                        }]
-                })
-                const convocacao = await Convocacao.findAll({
-                         where: { evento_id: idEvento}
-                 })
+                            }],
+                    })
 
+                    const convocacao = await Convocacao.findAll({
+                        where: { evento_id: idEvento}
+                    })
+
+                    return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg}) 
+            } else if(req.query.search && !req.query.sexo && req.query.funcao) {
+                const contratos = await Contrato.findAll({ 
+                    where: { empresa_id: idLogado, funcao: req.query.funcao },
+                    include:
+                            [{
+                                model: Colaborador,
+                                required: true,
+                                where:  { nome: {[Op.like]: req.query.search + '%'} },
+                            }],
+                    })
+
+
+                    const convocacao = await Convocacao.findAll({
+                        where: { evento_id: idEvento}
+                    })
+
+                    return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg}) 
+            }else if(!req.query.search && req.query.sexo && req.query.funcao) {
+                const contratos = await Contrato.findAll({ 
+                    where: { empresa_id: idLogado, funcao: req.query.funcao },
+                    include:
+                            [{
+                                model: Colaborador,
+                                required: true,
+                                where: { sexo: req.query.sexo },
+                            }],
+                    })
+
+                    const convocacao = await Convocacao.findAll({
+                        where: { evento_id: idEvento}
+                    })
+
+                    return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg}) 
+            }
+            else {
+                const contratos = await Contrato.findAll({ 
+                    where: { empresa_id: idLogado },
+                    include:
+                            [{
+                                model: Colaborador,
+                                // where:{ id: Sequelize.col('colaborador_id') },
+                                required: true,
+                                // right: true
+                            }],
+                    })
+
+                    const convocacao = await Convocacao.findAll({
+                        where: { evento_id: idEvento}
+                    })
+
+                    
                 return res.render('empresa/convoca', { idLogado, evento, convocacao, contratos, moment, msg})
-
             }
 
         }

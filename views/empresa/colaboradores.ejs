@@ -14,13 +14,13 @@
         </div>
         <div class='row'>
             <div class='ml-3 mt-4'>
-                <p>Lista de colaboradores:</p>
+                <h4>Lista de colaboradores:</h4>
             </div>
         </div>
         <%# console.log(contratos) %>
 
 
-        <% if(typeof contratos !== 'undefined' && contratos.length !== 0) { %>
+        
             <form class='col-sm-12 p-0' action="/empresa/colaboradores" method="GET">
                 <div class="form-group">
                     <div id="accordion">
@@ -29,10 +29,23 @@
                                 <div class='row'>
                                     <div class='col'>
                                         <div class="form-group">
-                                            <input type="search" class="form-control form-control-lg" name="search" id="search" placeholder="Nome do colaborador">
+                                            <input type="search" class="form-control form-control-md" name="search" id="search" placeholder="Nome do colaborador">
                                         </div>
                                     </div>
-                                    <div class='col'>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="funcao" name="funcao">
+                                          <option value="" disabled selected hidden>Selecione uma função...</option>
+                                          <option>Pintor</option>
+                                          <option>Carpinteiro</option>
+                                          <option>Eletricista</option>
+                                          <option>Marceneiro</option>
+                                          <option>Vidraceiro</option>
+                                          <option>Pedreiro</option>
+                                        </select>
+                                    </div>                                    
+                                </div>
+                                <div class="row">
+                                    <div class='col ml-3'>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="sexo" id="Masculino" value="m">
                                             <label class="form-check-label" for="Masculino">
@@ -46,9 +59,8 @@
                                             </label>
                                         </div>
                                     </div>
-                                    
                                 </div>
-                                <div class='row'>
+                                <div class='row mt-3'>
                                     <div class='col-sm-12 col-lg-6'>
                                         <div class="form-group">
                                             <input type="submit" class="form-control btn btn-secondary" value="Pesquisar">
@@ -66,7 +78,8 @@
                     </div>
                 </div>
             </form>
-    
+            <% if(typeof contratos !== 'undefined' && contratos.length !== 0) { %>
+
             <div class="form-check pl-0">
             <!-- <div class="container">
                 <div class="row d-flex justify-content-between">
@@ -140,7 +153,7 @@
                 </div>
             <% }); %>
         <% } else { %>
-            <div class="text-center"> Não encontramos nenhum contrato :( </div>
+            <h5 class="text-center mt-4"> Não encontramos nenhum contrato :( </h5>
         <% } %>
 
         </div>
