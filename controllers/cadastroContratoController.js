@@ -40,7 +40,7 @@ const cadastroContratoController = {
                     funcao,
                     inicioJornada,
                     terminoJornada,
-                    valorHora,
+                    valorHora: valorHora.replace(/[^\d]/g,'').replace(/(\d{1,})(\d{2})/, '$1.$2'),
                     descricao
                 })
                 // console.log(novoContrato)
