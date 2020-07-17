@@ -188,31 +188,40 @@ const convocacaoController = {
         try {
             const convocados = await Convocacao.findAll({ where: Sequelize.and({evento_id: eventoId},{dataAceitacao: {[Op.not]: null}})})
             
-            console.log(convocados.length)
+            
 
-            if(convocados.length > 0){
+           // if(convocados.length > 0){
+
+                const convocacao = await Convocacao.update({ 
+                    dataAceitacao: date,
+                    filaDeEspera: 0
+                },{
+                    where: { id: id },
+                
+                })
 
                 const evento = await Evento.findOne({ where: { id: eventoId }})
 
-                if(convocados.length >= evento.qtdeProfissionais){
-                    req.session.msg = "As vagas para esse evento já foram preenchidas!"
+                console.log('-------------------')
+                console.log(convocados.length)
+                console.log((convocados.length + 1) >= evento.qtdeProfissionais)
+                console.log('-------------------')
+
+                if((convocados.length + 1) >= evento.qtdeProfissionais){
+                    //req.session.msg = "As vagas para esse evento já foram preenchidas!"
                     const convocacao = await Convocacao.update({ 
-                        dataRecusa: date 
+                        filaDeEspera: 1 
                     },{
-                        where: Sequelize.and({dataAceitacao: null },{dataRecusa: null }, {evento_id: eventoId}),
+                        where: Sequelize.and({dataAceitacao: null },{dataRecusa: null }, Sequelize.or({filaDeEspera: {[Op.ne]: 0 }},{filaDeEspera: {[Op.is]: null }}), {evento_id: eventoId}),
                         
                     })
+                    console.log(convocacao)
                     return res.redirect('/colaborador/notificacoes')
                 }
                 
 
-            }
-            const convocacao = await Convocacao.update({ 
-                    dataAceitacao: date 
-                },{
-                    where: { id: id },
-                    
-            })
+            //}
+
             
             return res.redirect('/colaborador/notificacoes')
         }
@@ -239,6 +248,30 @@ const convocacaoController = {
             console.log(e);
             return res.send(e);
         }
+    },
+    desiste: async(req,res) => {
+        const { id } = req.params;
+        
+        const date = new Date();
+
+        try {
+            const convocacao = await Convocacao.update({ 
+                dataRecusa: date 
+            },{
+                where: { id : id} ,
+            })
+            const limpaEspera = await Convocacao.update({ 
+                filaDeEspera: null 
+            },{
+                where: { id : {[Op.ne]:id}} ,
+            })
+            return res.redirect("/colaborador/eventos")
+        }
+        catch(e){
+            console.log(e);
+            return res.send(e);
+        }
+
     }
 }
 

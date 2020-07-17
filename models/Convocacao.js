@@ -33,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATE,
             allowNull: true,
         },
+        filaDeEspera:
+        {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        }
     },
     {
         timestamps: false,

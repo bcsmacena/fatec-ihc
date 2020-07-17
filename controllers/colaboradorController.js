@@ -1,6 +1,6 @@
 const { Colaborador, Contrato, Convocacao, Evento, Empresa } = require('../models')
 const Sequelize = require('sequelize');
-
+const { Op } = require('sequelize')
 const moment = require('moment')
 
 const colaboradorController = {
@@ -68,6 +68,33 @@ const colaboradorController = {
             console.log(e)
             return res.send(e);
         }  
+    },
+
+    eventos: async(req,res) => {
+        const { id } = req.session.user
+
+        try{
+            const colaborador = await Colaborador.findByPk(id, {
+                include: [{
+                    model: Contrato,
+                    require: true,
+                    include: [{
+                        model: Convocacao,
+                        require: true,
+                        where: {dataAceitacao: {[Op.not]: null}},
+                        include: [{
+                            model: Evento,
+                            require: true
+                        }]
+                    }]
+                }]
+            })
+            return res.render('colaboradorEventos', { colaborador, moment })
+        }
+        catch(e){
+            return res.send(e);
+        }
+       
     }
 }
 

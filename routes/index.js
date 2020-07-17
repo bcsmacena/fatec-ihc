@@ -51,12 +51,14 @@ router.get('/convoca/evento/:eventoId/:contratoId', auth, convocacaoController.s
 
 router.get('/aceita/:id/:eventoId', auth, convocacaoController.aceita)
 router.get('/recusa/:id/:eventoId', auth, convocacaoController.recusa)
+router.get('/desiste/:id', auth, convocacaoController.desiste)
 
 router.get('/cadastro/evento', auth,  (req, res) => res.render('cadastro/evento'));
 
 router.get('/colaborador', auth, colaboradorController.index);
 router.get('/colaborador/notificacoes', auth, colaboradorController.notificacoes);
 router.get('/colaborador/contratos', auth, colaboradorController.contratos);
+router.get('/colaborador/eventos', auth, colaboradorController.eventos);
 
 router.get('/empresa', auth, (req,res) => res.render('empresa'));
 

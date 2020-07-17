@@ -1,0 +1,101 @@
+<%- include('partials/head.ejs') %>
+<body>
+    <header>
+        <nav class="navbar sticky-top navbar-light bg-light">
+            <a class="navbar-brand" href="#">Trabalho Intermitente</a>
+            <a class="navbar-brand" href="/colaborador"><i class="fa fa-undo"></i></a>
+        </nav>
+    </header>
+    <main class='container mt-4 col-lg-6'>
+        <div class='row'>
+            <div class='ml-0 col-sm-12'>
+                <h2><%= colaborador.nome %></h2>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='ml-3 my-4'>
+                <h4>Meus Eventos:</h4>
+            </div>
+        </div>
+        
+
+        <% contratos = colaborador.Contratos; //console.log(colaborador.Contratos) %>
+
+        <% if(typeof contratos !== 'undefined' && contratos.length !== 0) { %>
+            
+            <div class="form-check pl-0">
+            <% contratos.forEach(contrato => { %>
+                <% contrato.Convocacaos.forEach(convocacao => { %>
+                    <% contador = 0; if(!convocacao.dataRecusa) { %>
+                        <div class="card text-center mb-2">
+                            <div class="card-header text-left bg-white">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col col-12 col-lg-6 d-flex align-items-center mb-2 pl-0">
+                                            <%= convocacao.Evento.nome %> - <%= contrato.funcao %>
+                                        </div>
+
+                                        <div class="col d-flex justify-content-end  col-12 col-lg-6 pr-0 mb-2">
+                                            <a class="btn btn-info ml-1 col-lg-6" data-toggle="collapse" href="#collapse-<%= convocacao.Evento.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">Informações</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-12 col-lg-6 d-flex align-items-center mb-2 pl-0">
+                                            Data convocação - <%= moment(convocacao.dataConvocacao).format("DD/MM/YYYY - HH:mm") %>
+                                        </div>
+                                        <% const today = new Date(); if(Math.round((today - convocacao.dataConvocacao)/1000/3600) < 24){ %>
+                                            <div class="col d-flex justify-content-end  col-12 col-lg-6 pr-0 ">
+                                                <a class="btn btn-danger ml-1 col-lg-6" href="/desiste/<%= convocacao.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">Desistir</a>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="collapse" id="collapse-<%= convocacao.Evento.id %>">
+                                <!-- <div class="card-header">
+                                <ul class="nav nav-tabs card-header-tabs">
+
+                                    <li class="nav-item">
+                                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile-<%= contrato.id %>" role="tab" aria-controls="nav-profile" aria-selected="false">Contrato</a>
+                                    </li>
+
+                                </ul>
+                                </div>
+                        
+                                <div class="tab-content" id="myTabContent"> -->
+
+                                    <!-- <div class="tab-pane fade" id="nav-profile-<%= contrato.id %>" role="tabpanel" aria-labelledby="nav-profile-tab"> -->
+                                        <div class="card-body">
+                                            <h5 class="card-title text-left">Função: <%= contrato.funcao %></h5>
+                                            <p class="card-text text-left">Valor hora: R$ <%= contrato.valorHora %> </p>
+                                            <p class="card-text text-left">Data: <%= moment(convocacao.Evento.data).format("DD/MM/YYYY"); %> </p>
+                                            <p class="card-text text-left">Jornada: <%= convocacao.Evento.inicioJornada.slice(0,5) %> - <%= convocacao.Evento.terminoJornada.slice(0,5) %> </p>
+                                            <p class="card-text text-left">Endereço: <%= convocacao.Evento.endereco %>, <%= convocacao.Evento.numero %> - <%= convocacao.Evento.complemento %> - <%= convocacao.Evento.bairro %> - <%= convocacao.Evento.cidade %> - <%= convocacao.Evento.estado %></p>
+                                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                                        </div>
+                                    <!-- </div> -->
+
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                    <% contador++ } %>
+                <% }) %>
+            <% }); %>
+            <% if(!contador) { %> 
+                <h5 class="text-center"> Você ainda não aceitou nenhuma convocação :(</h5>
+            <% } %>
+        <% } else { %>
+            <h5 class="text-center"> Você ainda não aceitou nenhuma convocação :( </h5>
+        <% } %>
+
+        </div>
+
+
+        
+    </main>
+
+    <%- include('partials/jsBootstrap.ejs') %>
+
+
+</body>
+</html>

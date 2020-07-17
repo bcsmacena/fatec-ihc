@@ -6,10 +6,10 @@
             <a class="navbar-brand" href="/colaborador"><i class="fa fa-undo"></i></a>
         </nav>
     </header>
-    <main class='container mt-5 col-lg-6'>
+    <main class='container mt-4 col-lg-6'>
         <div class='row'>
             <div class='ml-3'>
-                <h2>Perfil de <%= colaborador.nome %></h2>
+                <h2><%= colaborador.nome %></h2>
                 <% if( typeof msg !== 'undefined' && msg != "") {%>
                     <div class='col-sm-12 p-1 bg-danger text-light text-center' id="msg"><%= msg %></div>
                     <% } %>
@@ -21,12 +21,12 @@
             </div>
         </div>
         <div>
-            <% contador = 0; mensagem = "" %>
+            <% contador = 0; mensagem = ""; today = new Date() %>
             <% colaborador.Contratos.forEach(contrato => { %>    
             <% contrato.Convocacaos.forEach(convocacao => { %>
                     <% console.log(!convocacao.dataAceitacao && !convocacao.dataRecusa) %>
+                    <% if(!convocacao.dataAceitacao && !convocacao.dataRecusa && ((today - convocacao.dataConvocacao)/1000/3600 < 24)){ %>
                     
-                    <% if(!convocacao.dataAceitacao && !convocacao.dataRecusa){ %>
                         <div class="card text-center ml-2 mb-2">
                             <h5 class="card-header">
                                 <%= convocacao.Evento.nome + " - " + moment(convocacao.Evento.data).format("DD/MM/YYYY") %>
@@ -44,8 +44,13 @@
                                                                         <%= convocacao.Evento.estado %>
                                 </p>
                                 <p class="card-title text-left">Descrição: <%= convocacao.Evento.descricao %></p>
-                                <a href="/aceita/<%= convocacao.id %>/<%= convocacao.Evento.id %>" class="btn btn-success">Aceitar</a>
-                                <a href="/recusa/<%= convocacao.id %>/<%= convocacao.Evento.id %>" class="btn btn-danger">Recusar</a>
+                               
+                                <% if(convocacao.filaDeEspera != 1){ %>   
+                                    <a href="/aceita/<%= convocacao.id %>/<%= convocacao.Evento.id %>" class="btn btn-success">Aceitar</a>
+                                    <a href="/recusa/<%= convocacao.id %>/<%= convocacao.Evento.id %>" class="btn btn-danger">Recusar</a>
+                                <% } else { %>
+                                    <p class='text-danger'>As vagas para esse evento já foram preenchidas, mas fique atento pois você está na fila de espera caso haja desistência!</p>
+                                <% } %>
                                 <!-- <a href="#" class="btn btn-info">Informações</a> -->
                             </div>
                             <div class="card-footer text-muted">
@@ -55,12 +60,12 @@
                             <% contador++; mensagem = "" %>
                         </div>
                     <% } else if (!contador) { mensagem = "Não existem solicitações pendentes!"; console.log(contador)} %>
-            <% }); %>
+            <% }); if (!contador) { mensagem = "Não existem solicitações pendentes!"; console.log(contador)}; %>
             <% }); %>
         </div>
-        <h3 class='text-center'>
+        <h5 class='text-center'>
             <%= mensagem %>
-        </h3>
+        </h5>
 
         <!-- <div class='row'>
             <div class='ml-5 mt-4'>

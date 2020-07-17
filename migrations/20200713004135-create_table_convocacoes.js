@@ -47,6 +47,11 @@ module.exports = {
           type: Sequelize.DATE,
           allowNull: true
         },
+        dataAceitacao:
+        {
+          type: Sequelize.INTEGER,
+          allowNull: true
+        },
       })
     },
 
