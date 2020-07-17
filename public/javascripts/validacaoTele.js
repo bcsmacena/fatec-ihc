@@ -10,13 +10,13 @@ inputTele.addEventListener("keypress", (e) => {
 })
 
 function mascara( campo ) {
-if (inputTele.value.length == 10) { 
+if (inputTele.value.length <= 13) { 
         campo.value = campo.value.replace( /[^\d]/g, '' )
                                  .replace( /^(\d\d)(\d)/, '($1) $2' )
                                  .replace( /(\d{4})(\d)/, '$1-$2' );
          } else {
                  campo.value = campo.value.replace( /[^\d]/g, '' )
                                           .replace( /^(\d\d)(\d)/, '($1) $2' )
-                                          .replace( /(\d{4})(\d)/, '$1-$2' );
+                                          .replace( /(\d{5})(\d)/, '$1-$2' );
     }
 }
