@@ -38,6 +38,7 @@ function preencheCep(){
     alert("O CEP DIGITADO ESTÁ INVÁLIDO");
     inputCep.value = "";
     inputCep.focus();
+    limpaCampos(data);
     return ;
     }
     atribuirCampos(data);
@@ -54,6 +55,20 @@ function preencheCep(){
     cidade.value = data.localidade;
     estado.value = data.uf;
     endereco.value = data.logradouro;
+        
+  }
+
+  function limpaCampos(data){
+        
+    const bairro = document.querySelector("#bairro");
+    const cidade = document.querySelector("#cidade");
+    const estado = document.querySelector("#estado");
+    const endereco = document.querySelector("#endereco");
+    
+    bairro.value = "";
+    cidade.value = "";
+    estado.value = "";
+    endereco.value = "";
         
   }
 
