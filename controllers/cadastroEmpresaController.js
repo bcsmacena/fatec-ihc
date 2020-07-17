@@ -10,9 +10,11 @@ const cadastroEmpresaController = {
 
         const hashPassword = bcrypt.hashSync(senha, 10);
 
+        cnpjSemMascara = cnpj.replace(/[^\d]/g, '')
+
         try{
             const empresa = await Empresa.create({
-                cnpj,
+                cnpj: cnpjSemMascara,
                 razaoSocial,
                 nomeFantasia,
                 atuacao,

@@ -1,27 +1,46 @@
 const inputCnpj = document.querySelector("#cnpj");
+const alertaCNPJ = document.getElementById("alertaCNPJ");
 
 inputCnpj.addEventListener("keypress", (e) => {
-  if(cnpj.value.length == 14 || e.keyCode < 48 || e.keyCode > 57 ){
+  if(cnpj.value.length == 18 || e.keyCode < 48 || e.keyCode > 57 ){
       e.preventDefault();
       inputCnpj.focus();
       return;
   }
+   mascaraCNPJ(inputCnpj);
 })
+
+function mascaraCNPJ(campo) {
+       campo.value = campo.value.replace(/^(\d{2})(\d)/, '$1.$2')
+                      .replace(/^(\d{2}.\d{3})(\d)/, '$1.$2')
+                      .replace(/^(\d{2}.\d{3}\.\d{3})(\d)/, '$1/$2')
+                      .replace(/^(\d.*\/\d{4})(\d)/, '$1-$2')
+}
+
 
 inputCnpj.addEventListener("focusout", (e) => {
     const cnpj = inputCnpj.value;
     const validacnpj = validarCNPJ(cnpj)
+    mascaraCNPJ(inputCnpj);
+    inputCnpj.style.background = '#ffffff'
+    alertaCNPJ.innerText = ""
 
     if (!validacnpj){
-        alert("CNPJ Inválido.");
-       
+        //alert("CNPJ Inválido.");
+        inputCnpj.style.background = '#fff0f0'
+        alertaCNPJ.innerText = "Inválido!"
+        alertaCNPJ.style.color = '#dc3545'
+        inputCnpj.focus();
     }
+    
 })
+
+
 
 function validarCNPJ(cnpj) {
     cnpj = cnpj.replace(/[^\d]+/g,'');
  
-    if(cnpj == '') return false;
+    if(cnpj == '') return true;
      
     if (cnpj.length != 14)
         return false;
@@ -66,7 +85,7 @@ function validarCNPJ(cnpj) {
     resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
     if (resultado != digitos.charAt(1))
           return false;
-           
+
     return true;
     
 }
