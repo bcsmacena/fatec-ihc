@@ -11,7 +11,7 @@ const cadastroContratoController = {
         }
         catch(e)
         {   
-            console.log(e);
+            // console.log(e);
             return res.send(e)
         }        
     },
@@ -52,7 +52,7 @@ const cadastroContratoController = {
             }
         }
         catch(e){
-            console.log(e);
+            // console.log(e);
             return res.send(e);
         }        
     },

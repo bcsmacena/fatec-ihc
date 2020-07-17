@@ -1,7 +1,8 @@
-const { Evento, Convocacao } = require('../models')
+const { Evento, Convocacao, Contrato, Colaborador } = require('../models')
 const Sequelize = require('sequelize')
 
-const moment = require('moment')
+const moment = require('moment');
+const { ExclusionConstraintError } = require('sequelize');
 
 const eventoController = {
     index: async (req, res) => {
@@ -14,7 +15,15 @@ const eventoController = {
                 include: 
                 [{
                     model: Convocacao,
-                    require: true
+                    require: true,
+                    include: [{
+                        model: Contrato,
+                        require: true,
+                        include: [{
+                            model: Colaborador,
+                            require: true
+                        }]
+                    }]
                 }]
             })
 

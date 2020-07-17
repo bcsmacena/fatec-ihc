@@ -7,8 +7,8 @@ const moment = require('moment');
 const contratoController = {
     index: async (req, res) => {
 
-        console.log("Seach query")
-        console.log(req.query)
+        // console.log("Seach query")
+        // console.log(req.query)
         
         const idLogado = req.session.user.id;
 

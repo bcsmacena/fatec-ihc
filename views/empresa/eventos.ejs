@@ -42,7 +42,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <% const aceitos = evento.Convocacaos.filter((item) => item.dataAceitacao != null).length %>
+                            <% const aceitos = evento.Convocacaos.filter((item) => item.dataAceitacao != null && item.dataRecusa == null).length %>
                         <h5 class="card-title"><%= evento.nome %> - Aceites [<%= aceitos %>/<%= evento.qtdeProfissionais %>]</h5>
 
                         <p class="card-text">Data: <%= moment(evento.data).format("DD/MM/YYYY"); %> - Início: <%= (evento.inicioJornada).slice(0,5) %> - Término: <%= (evento.terminoJornada).slice(0,5) %> </p>
@@ -55,6 +55,17 @@
                         <a href="/convoca/evento/<%= evento.id %>" class="card-link <%= ocultar %>">Convocar</a>
                         <!-- <a href="#" class="card-link">Another link</a> -->
                         </div>
+                        <div class="card-footer">
+                            <p>Aceitos:</p>
+                            <ul>
+                                <% evento.Convocacaos.forEach(convocacao => { %>
+                                    <% if(convocacao.dataAceitacao && !convocacao.dataRecusa) { %>
+                                       <li><%= convocacao.Contrato.Colaborador.nome %></li> 
+                                    <% } %>
+                                <% }); %>
+                            </ul>
+                        </div>
+
                     </div>
                 </div>
             </div>

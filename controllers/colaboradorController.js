@@ -38,7 +38,7 @@ const colaboradorController = {
             return res.render('colaboradorNotificacoes', {colaborador, moment, msg});
         }
         catch(e){
-            console.log(e)
+            // console.log(e)
             return res.send(e);
         }       
 
@@ -65,7 +65,7 @@ const colaboradorController = {
 
         } 
         catch(e){
-            console.log(e)
+            // console.log(e)
             return res.send(e);
         }  
     },

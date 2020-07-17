@@ -16,7 +16,7 @@ const authController = {
       });
 
       if (!colaborador || !bcrypt.compareSync(senha, colaborador.senha)) {
-        console.log("errou");
+        // console.log("errou");
         return res.render("auth/login", {
           msg: "Email ou senha errados!",
         });
@@ -36,7 +36,7 @@ const authController = {
       });
 
       if (!empresa || !bcrypt.compareSync(senha, empresa.senha)) {
-        console.log("errou");
+        // console.log("errou");
         return res.render("auth/login", {
           msg: "Email ou senha inválidos!",
         });
@@ -54,7 +54,7 @@ const authController = {
 
   destroy: (req, res) => {
     req.session.user = "";
-    console.log(req.session)
+    // console.log(req.session)
     return res.redirect("/");
   },
 };

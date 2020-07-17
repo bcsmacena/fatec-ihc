@@ -30,7 +30,7 @@ const cadastroEventoController = {
             return res.render('empresa', { msg: "Novo evento cadastrado com sucesso"});
         }
         catch(e){
-            console.log(e);
+            // console.log(e);
             return res.send(e);
         }        
     },

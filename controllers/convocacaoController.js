@@ -284,7 +284,7 @@ const convocacaoController = {
         const idLogado = req.session.user.id;
         const date = new Date();
 
-        console.log(checkbox);
+        // console.log(checkbox);
 
         if(typeof checkbox != 'undefined' ){
 
@@ -299,7 +299,7 @@ const convocacaoController = {
                 // console.log("convocou" + contratoId )
             }
             catch(e){
-                console.log(e)
+                // console.log(e)
             }})
 
             req.session.msg = 'Colaboradores convocados com sucesso'
@@ -348,10 +348,10 @@ const convocacaoController = {
 
                 const evento = await Evento.findOne({ where: { id: eventoId }})
 
-                console.log('-------------------')
-                console.log(convocados.length)
-                console.log((convocados.length + 1) >= evento.qtdeProfissionais)
-                console.log('-------------------')
+                // console.log('-------------------')
+                // console.log(convocados.length)
+                // console.log((convocados.length + 1) >= evento.qtdeProfissionais)
+                // console.log('-------------------')
 
                 if((convocados.length + 1) >= evento.qtdeProfissionais){
                     //req.session.msg = "As vagas para esse evento já foram preenchidas!"
@@ -361,7 +361,7 @@ const convocacaoController = {
                         where: Sequelize.and({dataAceitacao: null },{dataRecusa: null }, Sequelize.or({filaDeEspera: {[Op.ne]: 0 }},{filaDeEspera: {[Op.is]: null }}), {evento_id: eventoId}),
                         
                     })
-                    console.log(convocacao)
+                    // console.log(convocacao)
                     return res.redirect('/colaborador/notificacoes')
                 }
                 
@@ -372,7 +372,7 @@ const convocacaoController = {
             return res.redirect('/colaborador/notificacoes')
         }
         catch(e){
-            console.log(e);
+            // console.log(e);
             return res.send(e);
         }
     },
@@ -391,7 +391,7 @@ const convocacaoController = {
             return res.redirect('/colaborador/notificacoes')
         }
         catch(e){
-            console.log(e);
+            // console.log(e);
             return res.send(e);
         }
     },
@@ -414,7 +414,7 @@ const convocacaoController = {
             return res.redirect("/colaborador/eventos")
         }
         catch(e){
-            console.log(e);
+            // console.log(e);
             return res.send(e);
         }
 

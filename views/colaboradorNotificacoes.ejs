@@ -24,7 +24,7 @@
             <% contador = 0; mensagem = ""; today = new Date() %>
             <% colaborador.Contratos.forEach(contrato => { %>    
             <% contrato.Convocacaos.forEach(convocacao => { %>
-                    <% console.log(!convocacao.dataAceitacao && !convocacao.dataRecusa) %>
+                    <%# console.log(!convocacao.dataAceitacao && !convocacao.dataRecusa) %>
                     <% if(!convocacao.dataAceitacao && !convocacao.dataRecusa && ((today - convocacao.dataConvocacao)/1000/3600 < 24)){ %>
                     
                         <div class="card text-center ml-2 mb-2">
@@ -49,7 +49,7 @@
                                     <a href="/aceita/<%= convocacao.id %>/<%= convocacao.Evento.id %>" class="btn btn-success">Aceitar</a>
                                     <a href="/recusa/<%= convocacao.id %>/<%= convocacao.Evento.id %>" class="btn btn-danger">Recusar</a>
                                 <% } else { %>
-                                    <p class='text-danger'>As vagas para esse evento já foram preenchidas, mas fique atento pois você está na fila de espera caso haja desistência!</p>
+                                    <p class='text-danger'>As vagas para esse evento já foram preenchidas, mas fique atento pois você está na fila de espera!</p>
                                 <% } %>
                                 <!-- <a href="#" class="btn btn-info">Informações</a> -->
                             </div>
@@ -59,8 +59,8 @@
                             </div>
                             <% contador++; mensagem = "" %>
                         </div>
-                    <% } else if (!contador) { mensagem = "Não existem solicitações pendentes!"; console.log(contador)} %>
-            <% }); if (!contador) { mensagem = "Não existem solicitações pendentes!"; console.log(contador)}; %>
+                    <% } else if (!contador) { mensagem = "Não existem solicitações pendentes!"; } %>
+            <% }); if (!contador) { mensagem = "Não existem solicitações pendentes!"; }; %>
             <% }); %>
         </div>
         <h5 class='text-center'>
