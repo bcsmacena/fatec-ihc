@@ -16,9 +16,11 @@ const cadastroColaboradorController = {
             attrSexo = "m";
         }
 
+        cpfSemMascara = cpf.replace(/[^\d]/g, '')
+
         try{
             const colaborador = await Colaborador.create({
-                cpf,
+                cpf: cpfSemMascara,
                 nome,
                 dataNascimento,
                 sexo: attrSexo,

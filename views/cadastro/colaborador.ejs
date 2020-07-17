@@ -36,7 +36,10 @@
             </div> 
             <div class="form-group">
                 <label for="cpf">* CPF:</label>
-                <input type="text" class="form-control" name="cpf" id="cpf" aria-describedby="cpf" placeholder="Insira somente os números sem os pontos" required>
+                <div style="position:relative">
+                    <input type="text" class="form-control" name="cpf" id="cpf" aria-describedby="cpf" placeholder="Insira somente os números sem os pontos" required>
+                    <div id='alertaCPF' style="heigth: 100%; position:absolute; bottom:5px; right:15px"></div>
+                </div>
             </div>
             <div class="form-group">
               <label for="nome">* Nome:</label>
@@ -94,7 +97,7 @@
             </div>
             <div class="form-group">
                 <label for="telefone">* Telefone</label>
-                <input type="text" class="form-control" name="telefone" id="telefone" aria-describedby="telefone" placeholder="(00) 00000-0000" required>
+                <input type="text" class="form-control" name="telefone" id="telefone" aria-describedby="telefone" onkeypress = mascara(this) placeholder="(00) 00000-0000" required>
             </div>
             <div class="form-group">
                 <label for="email">* Email</label>
