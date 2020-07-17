@@ -1,0 +1,91 @@
+<%- include('partials/head.ejs') %>
+<body>
+    <header>
+        <nav class="navbar sticky-top navbar-light bg-light">
+            <a class="navbar-brand" href="#">Trabalho Intermitente</a>
+            <a class="navbar-brand" href="/colaborador"><i class="fa fa-undo"></i></a>
+        </nav>
+    </header>
+    <main class='container mt-4 col-lg-6'>
+        <div class='row'>
+            <div class='ml-3 col-sm-12'>
+                <h2><%= colaborador.nome %></h2>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='ml-3 mt-4'>
+                <p>Meus contratos:</p>
+            </div>
+        </div>
+        <%# console.log(contratos) %>
+
+        <% contratos = colaborador.Contratos; //console.log(colaborador.Contratos) %>
+
+        <% if(typeof contratos !== 'undefined' && contratos.length !== 0) { %>
+   
+            <div class="form-check pl-0">
+            <!-- <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <a href="#" class="btn btn-secondary col-12 col-lg-5 mb-2 mr-0"  onclick="eventCheckBox()">Selecionar todos </a>
+                    <a href="#" class="btn btn-success col-12 col-lg-5 mb-2">Convocar todos os selecionados</a>
+                </div>
+            </div> -->
+            <% contratos.forEach(contrato => { %>
+                <div><%#= contrato.Colaborador.nome + " - " + contrato.Colaborador.sexo + " - " + contrato.funcao + " - " + contrato.valorHora %></div>
+                <div class="card text-center mb-2">
+                    <div class="card-header text-left bg-white">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col col-12 col-lg-6 d-flex align-items-center mb-2 pl-0">
+                                    <%= contrato.Empresa.razaoSocial %> - <%= contrato.funcao %>
+                                </div>
+                                    
+        
+                                    <div class="col d-flex justify-content-end  col-12 col-lg-6 pr-0 ">
+                                        <a class="btn btn-info ml-1" data-toggle="collapse" href="#collapse-<%= contrato.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">Informações</a>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse" id="collapse-<%= contrato.id %>">
+                        <!-- <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+
+                            <li class="nav-item">
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile-<%= contrato.id %>" role="tab" aria-controls="nav-profile" aria-selected="false">Contrato</a>
+                            </li>
+
+                        </ul>
+                        </div>
+                
+                        <div class="tab-content" id="myTabContent"> -->
+
+                            <!-- <div class="tab-pane fade" id="nav-profile-<%= contrato.id %>" role="tabpanel" aria-labelledby="nav-profile-tab"> -->
+                                <div class="card-body">
+                                    <h5 class="card-title text-left">Função: <%= contrato.funcao %></h5>
+                                    <p class="card-text text-left">Valor hora: R$ <%= contrato.valorHora %> </p>
+                                    <!-- <p class="card-text text-left">Descrição: <%= contrato.descricao %> </p> -->
+
+                                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                                </div>
+                            <!-- </div> -->
+
+                        <!-- </div> -->
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <div class="text-center"> Não encontramos nenhum contrato :( </div>
+        <% } %>
+
+        </div>
+
+
+        
+    </main>
+
+    <%- include('partials/jsBootstrap.ejs') %>
+
+
+</body>
+</html>
