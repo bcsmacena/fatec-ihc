@@ -1,163 +1,39 @@
 <%- include('partials/head.ejs') %>
-<body onload="limpaMsg()">
+<body>
     <header>
         <nav class="navbar sticky-top navbar-light bg-light">
             <a class="navbar-brand" href="#">Trabalho Intermitente</a>
             <a class="navbar-brand" href="/sair">Sair</a>
         </nav>
     </header>
-    <main class='container mt-5 col-lg-6'>
+    <main class='container mt-4 col-lg-6'>
         <div class='row'>
-            <div class='ml-3'>
-                <h2><%= colaborador.nome %></h2>
-                <% if( typeof msg !== 'undefined' && msg != "") {%>
-                    <div class='col-sm-12 p-1 bg-danger text-light text-center' id="msg"><%= msg %></div>
-                    <% } %>
-            </div>
-        </div>
-        <div class='row'>
-            <div class='ml-4 my-4'>
-                <h4>Notificações:</h4>
-            </div>
-        </div>
-        <div>
-            <% contador = 0; mensagem = "" %>
-            <% colaborador.Contratos.forEach(contrato => { %>    
-            <% contrato.Convocacaos.forEach(convocacao => { %>
-                    <% console.log(!convocacao.dataAceitacao && !convocacao.dataRecusa) %>
-                    
-                    <% if(!convocacao.dataAceitacao && !convocacao.dataRecusa){ %>
-                        <div class="card text-center ml-2 mb-2">
-                            <h5 class="card-header">
-                                <%= convocacao.Evento.nome + " - " + moment(convocacao.Evento.data).format("DD/MM/YYYY") %>
-                                - <% console.log(convocacao.Evento.nome) %>
-                                <%= (convocacao.Evento.inicioJornada).slice(0,5) %> às <%= (convocacao.Evento.terminoJornada).slice(0,5) %>
-                            </h5>
-                            <div class="card-body">
-                                <p class="card-title text-left">Empresa: <%= convocacao.Evento.Empresa.razaoSocial %> </p>
-                                <p class="card-title text-left">Função: <%= contrato.funcao %></p>
-                                <p class="card-text text-left">Endereço: <%= convocacao.Evento.endereco %>, 
-                                                                        <%= convocacao.Evento.numero %> -
-                                                                        <%= convocacao.Evento.complemento %> -
-                                                                        <%= convocacao.Evento.bairro %> -
-                                                                        <%= convocacao.Evento.cidade %> - 
-                                                                        <%= convocacao.Evento.estado %>
-                                </p>
-                                <p class="card-title text-left">Descrição: <%= convocacao.Evento.descricao %></p>
-                                <a href="/aceita/<%= convocacao.id %>/<%= convocacao.Evento.id %>" class="btn btn-success">Aceitar</a>
-                                <a href="/recusa/<%= convocacao.id %>/<%= convocacao.Evento.id %>" class="btn btn-danger">Recusar</a>
-                                <!-- <a href="#" class="btn btn-info">Informações</a> -->
-                            </div>
-                            <div class="card-footer text-muted">
-                                Data da convocação: <%= moment(convocacao.dataConvocacao).format("DD/MM/YYYY HH:mm:ss") %>
-                            </div>
-                            <% contador++; mensagem = "" %>
-                        </div>
-                    <% } else if (!contador) { mensagem = "Não existem solicitações pendentes"; console.log(contador)} %>
-            <% }); %>
-            <% }); %>
-        </div>
-        <div class='text-center'>
-            <%= mensagem %>
-        </div>
-
-        <div class='row'>
-            <div class='ml-5 mt-4'>
-                <p>Lista de aceitos:</p>
-            </div>
-        </div>
-        <div>
-            <% colaborador.Contratos.forEach(contrato => { %>
-            <% contrato.Convocacaos.forEach(convocacao => { %>
-                <% if(convocacao.dataAceitacao){ %>
-                    <div class='ml-3'>                                 
-                        <%= moment(convocacao.Evento.data).format("DD/MM/YYYY") %>
-                        -
-                        <%= (convocacao.Evento.inicioJornada).slice(0,5) %> às <%= (convocacao.Evento.terminoJornada).slice(0,5) %>
-                        -
-                        <%= convocacao.Evento.endereco %>, 
-                        <%= convocacao.Evento.complemento %> -
-                        <%= convocacao.Evento.bairro %>
-                    </div>
+            <div class='ml-3 col-sm-12'>
+                <h2>Perfil Colaborador</h2>
+                <% if( typeof msg !== 'undefined'){ %>
+                    <div class='col-sm-12 p-1 bg-success text-light text-center' id='mensagem' ><%= msg %></div>
                 <% } %>
-            <% }); %>
-            <% }); %>
+            </div>
+        </div>
+        <div class='row my-4 d-flex justify-content-center '>
+                <div class="col text-center">
+                    <a href="/colaborador/contratos"><i class="material-icons" style="font-size:72px;color:black">group</i></a>
+                    <p>Meus contratos</p>
+                </div>
+                <div class="col text-center">
+                    <a href="/colaborador/notificacoes"><i class="material-icons" style="font-size:72px;color:black">view_headline </i></a>
+                    <p>Notificacoes</p>
+                </div>
+            </div>
         </div>
 
 
 
-
-
-
-
-        <!-- <div class="card text-center ml-2 mb-2">
-            <div class="card-header text-left">
-                Empresa A
-            </div>
-            <div class="card-body">
-                <h5 class="card-title text-left">Pintor</h5>
-                <a href="#" class="btn btn-success">Aceitar</a>
-                <a href="#" class="btn btn-danger">Recusar</a>
-                <a href="#" class="btn btn-info">Informações</a>
-            </div>
-            <div class="card-footer text-muted">
-                1 day ago
-            </div>
-        </div>
-        <div class="card text-center ml-2 mb-2">
-            <div class="card-header text-left">
-                Empresa B
-            </div>
-            <div class="card-body">
-                <h5 class="card-title text-left">Carpinteiro</h5>
-                <a href="#" class="btn btn-success">Aceitar</a>
-                <a href="#" class="btn btn-danger">Recusar</a>
-                <a href="#" class="btn btn-info">Informações</a>
-            </div>
-            <div class="card-footer text-muted">
-                2 days ago
-            </div>
-        </div>
-        <div class="card text-center ml-2 mb-2">
-            <div class="card-header text-left">
-                Empresa C
-            </div>
-            <div class="card-body">
-                <h5 class="card-title text-left">Marceneiro</h5>
-                <a href="#" class="btn btn-success">Aceitar</a>
-                <a href="#" class="btn btn-danger">Recusar</a>
-                <a href="#" class="btn btn-info">Informações</a>
-            </div>
-            <div class="card-footer text-muted">
-                3 days ago
-            </div>
-        </div>
-        <div class="card text-center ml-2 mb-2">
-            <div class="card-header text-left">
-                Empresa D
-            </div>
-            <div class="card-body">
-                <h5 class="card-title text-left">Encanador</h5>
-                <a href="#" class="btn btn-success">Aceitar</a>
-                <a href="#" class="btn btn-danger">Recusar</a>
-                <a href="#" class="btn btn-info">Informações</a>
-            </div>
-            <div class="card-footer text-muted">
-                4 days ago
-            </div>
-        </div> -->
- 
           
         </main>
     
         <%- include('partials/jsBootstrap.ejs') %>
-        <script>
-            function limpaMsg(){
-                setTimeout(function () {
-                    document.getElementById("msg").classList.add("d-none");
-                }, 3000);
-            }
-        </script>
+    
   
     </body>
     </html>

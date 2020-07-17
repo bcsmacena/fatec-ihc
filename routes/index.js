@@ -55,6 +55,8 @@ router.get('/recusa/:id/:eventoId', auth, convocacaoController.recusa)
 router.get('/cadastro/evento', auth,  (req, res) => res.render('cadastro/evento'));
 
 router.get('/colaborador', auth, colaboradorController.index);
+router.get('/colaborador/notificacoes', auth, colaboradorController.notificacoes);
+router.get('/colaborador/contratos', auth, colaboradorController.contratos);
 
 router.get('/empresa', auth, (req,res) => res.render('empresa'));
 

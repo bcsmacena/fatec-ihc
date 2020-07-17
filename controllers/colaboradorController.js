@@ -1,13 +1,14 @@
 const { Colaborador, Contrato, Convocacao, Evento, Empresa } = require('../models')
 const Sequelize = require('sequelize');
-const contratoController = require('./contratoController');
-const convocacaoController = require('./convocacaoController');
-const eventoController = require('./eventoController');
 
 const moment = require('moment')
 
 const colaboradorController = {
-    index: async (req, res) => {
+    index: async(req, res) => {
+        res.render('colaborador');  
+    },
+
+    notificacoes: async (req, res) => {
 
         const idLogado = req.session.user.id;
         const msg = req.session.msg;
@@ -34,13 +35,39 @@ const colaboradorController = {
             }]}    
                 
             );
-            return res.render('colaborador', {colaborador, moment, msg});
+            return res.render('colaboradorNotificacoes', {colaborador, moment, msg});
         }
         catch(e){
             console.log(e)
             return res.send(e);
         }       
 
+    },
+
+    contratos: async (req, res) => {
+
+        const idLogado = req.session.user.id;
+
+        try{
+            const colaborador = await Colaborador.findByPk(idLogado,{ 
+            include: 
+            [{
+                model: Contrato,
+                require: true,
+                include: [{
+                    model: Empresa,
+                    require: true,
+                }]
+            }]
+        })
+            
+            return res.render('colaboradorContratos', { colaborador })
+
+        } 
+        catch(e){
+            console.log(e)
+            return res.send(e);
+        }  
     }
 }
 

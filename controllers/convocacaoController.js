@@ -202,7 +202,7 @@ const convocacaoController = {
                         where: Sequelize.and({dataAceitacao: null },{dataRecusa: null }, {evento_id: eventoId}),
                         
                     })
-                    return res.redirect('/colaborador')
+                    return res.redirect('/colaborador/notificacoes')
                 }
                 
 
@@ -214,7 +214,7 @@ const convocacaoController = {
                     
             })
             
-            return res.redirect('/colaborador')
+            return res.redirect('/colaborador/notificacoes')
         }
         catch(e){
             console.log(e);
@@ -233,7 +233,7 @@ const convocacaoController = {
                 where: { id: id },
                 
             })
-            return res.redirect('/colaborador')
+            return res.redirect('/colaborador/notificacoes')
         }
         catch(e){
             console.log(e);

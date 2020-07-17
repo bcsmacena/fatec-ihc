@@ -1,15 +1,22 @@
 const btnPesquisarCEP = document.querySelector("#btnPesquisar");
 const inputCep = document.querySelector("#cep");
+const numero = document.getElementById('numero');
 
 inputCep.addEventListener("keypress", (e) => {
-  if(cep.value.length >= 8 || e.keyCode < 48 || e.keyCode > 57 ){
+  if(inputCep.value.length >= 8 || e.keyCode < 48 || e.keyCode > 57 ){
       e.preventDefault();
   }
 })
 
-inputCep.addEventListener("focusout", (e) => {
-  preencheCep();
+numero.addEventListener("keypress", (e) => {
+  if(numero.value.length >= 8 || e.keyCode < 48 || e.keyCode > 57 ){
+      e.preventDefault();
+  }
 })
+
+// inputCep.addEventListener("focusout", (e) => {
+//   preencheCep();
+// })
 
 
 btnPesquisarCEP.addEventListener("click", event =>{
